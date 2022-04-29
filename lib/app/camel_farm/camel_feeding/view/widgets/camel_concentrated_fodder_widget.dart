@@ -1,0 +1,253 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../../../utils/style.dart';
+import '../../../../shared_widgets/label_widget.dart';
+import '../../../general_management/controller/camel_send_camel_herd_data_controller.dart';
+import '../../controller/camel_blended_checkbox_controller.dart';
+import '../../controller/camel_feeding_date_controller.dart';
+import '../../controller/camel_fooder_radio_controller.dart';
+import '../../controller/camel_rodents_radio_controller.dart';
+import '../../controller/camel_salt_bars_radio_controller.dart';
+import '../../controller/camel_storage_appropriate_radio_controller.dart';
+import '../../controller/camel_synthetic_blended_radio_controller.dart';
+import 'camel_feed_textfield_widget.dart';
+import 'camel_fooder_radio_widget.dart';
+import 'camel_synthetic_blended_radio_widget.dart';
+
+class CamelConcentratedFodderWidget extends StatelessWidget {
+  const CamelConcentratedFodderWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<SendCamelHerdDataController>(
+        init: SendCamelHerdDataController(),
+        builder: (sendDataCtrl) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const LabelWidget(label: "Synthetic or blended?"),
+              GetBuilder<CamelSyntheticBlendedRadioController>(
+                  init: CamelSyntheticBlendedRadioController(),
+                  builder: (mainRadioCtrl) {
+                    return Column(
+                      children: [
+                        CamelSyntheticBlendedRadioWidget(
+                            enumName: CamelSyntheticBlendedRadio,
+                            yesValue: CamelSyntheticBlendedRadio
+                                .synthetic, //? push in api object with id 82
+                            onChangedYes: (val) => mainRadioCtrl.onChange(
+                                val ?? CamelSyntheticBlendedRadio.synthetic),
+                            noValue: CamelSyntheticBlendedRadio
+                                .blended, //? push in api object with id 83
+                            onChangedNo: (val) => mainRadioCtrl.onChange(
+                                val ?? CamelSyntheticBlendedRadio.blended),
+                            groupValue: mainRadioCtrl.charcter),
+                        if (mainRadioCtrl.charcter ==
+                            CamelSyntheticBlendedRadio.synthetic)
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const LabelWidget(label: "Factory name : "),
+                              CamelFeedingTextFieldWidget(
+                                  title: "Factory name :",
+                                  onNoteChange: (val) {
+                                    sendDataCtrl.addAnswer(
+                                        id: 84, answer: val ?? "");
+                                  }),
+                              /* const LabelWidget(label: "Expiration date : "),*/
+                              /*
+                            GetBuilder<ImagePickerController>(
+                                init: ImagePickerController(),
+                                builder: (imgCtrl) {
+                                  return InkWell(
+                                      onTap: () {
+                                        imgCtrl.pickImageFromCam();
+                                      },
+                                      child: ImagesWidget(
+                                          path1: imgCtrl.image.path,
+                                          file1: imgCtrl.image));
+                                }),
+                                */
+                              //? push in api object with id 85
+                              GetBuilder<CamelFeedingDateController>(
+                                  init: CamelFeedingDateController(),
+                                  builder: (dateCtrl) {
+                                    return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const LabelWidget(
+                                            label: "Expiration date? "),
+                                        CupertinoButton(
+                                            child: Container(
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 10),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 10),
+                                                alignment: Alignment.center,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    13,
+                                                decoration: BoxDecoration(
+                                                  color: primaryColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                ),
+                                                child: Text(
+                                                  "${dateCtrl.date.year}-${dateCtrl.date.month}-${dateCtrl.date.day} ",
+                                                  textAlign: TextAlign.center,
+                                                  style: const TextStyle(
+                                                      color: whiteColor,
+                                                      fontSize: 15),
+                                                )),
+                                            onPressed: () =>
+                                                dateCtrl.onDateChange(context)),
+                                      ],
+                                    );
+                                  }),
+                            ],
+                          ),
+                        if (mainRadioCtrl.charcter ==
+                            CamelSyntheticBlendedRadio.blended)
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const LabelWidget(label: "Was it added?"),
+                              GetBuilder<CamelblendedCheckboxController>(
+                                  init:
+                                      CamelblendedCheckboxController(choices: [
+                                    "Anti-fungal",
+                                    "salts or vitamins",
+                                  ]),
+                                  builder: (feedTypeCtrl) {
+                                    return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          children: List.generate(
+                                              feedTypeCtrl.choicesBoolList
+                                                  .length, (index) {
+                                            return ListTile(
+                                              title: Text(
+                                                  feedTypeCtrl.choices[index]),
+                                              leading: Checkbox(
+                                                value: feedTypeCtrl
+                                                    .choicesBoolList[index],
+                                                onChanged: (val) => feedTypeCtrl
+                                                    .onChange(val, index),
+                                              ),
+                                            );
+                                          }),
+                                        ),
+                                        if (feedTypeCtrl.choicesBoolList.last ==
+                                            true)
+                                          const CamelConcentratedFodderWidget()
+                                      ],
+                                    );
+                                  })
+                            ],
+                          ),
+                      ],
+                    );
+                  }),
+              //? push in api object with id 86 if yes and 87 if no
+              const LabelWidget(label: "Is fodder stored?"),
+              GetBuilder<CamelFooderRadioController>(
+                  init: CamelFooderRadioController(),
+                  builder: (fooderRadioCtrl) {
+                    return Column(
+                      children: [
+                        CamelFooderRadioWidget(
+                            enumName: CamelFooderRadio,
+                            yesValue: CamelFooderRadio.yes,
+                            onChangedYes: (val) => fooderRadioCtrl
+                                .onChange(val ?? CamelFooderRadio.yes),
+                            noValue: CamelFooderRadio.no,
+                            onChangedNo: (val) => fooderRadioCtrl
+                                .onChange(val ?? CamelFooderRadio.no),
+                            groupValue: fooderRadioCtrl.charcter),
+                        if (fooderRadioCtrl.charcter == CamelFooderRadio.yes)
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              //? push in api object with id 88 if yes and 89 if no
+                              const LabelWidget(
+                                  label:
+                                      "Is the storage appropriate? (in terms of temperature, humidity, ventilation, and sealing)"),
+                              GetBuilder<
+                                      CamelStorageAppropriateRadioController>(
+                                  init:
+                                      CamelStorageAppropriateRadioController(),
+                                  builder: (storageCtrl) {
+                                    return CamelFooderRadioWidget(
+                                        enumName: CamelStorageAppropriateRadio,
+                                        yesValue:
+                                            CamelStorageAppropriateRadio.yes,
+                                        onChangedYes: (val) =>
+                                            storageCtrl.onChange(val ??
+                                                CamelStorageAppropriateRadio
+                                                    .yes),
+                                        noValue:
+                                            CamelStorageAppropriateRadio.no,
+                                        onChangedNo: (val) =>
+                                            storageCtrl.onChange(val ??
+                                                CamelStorageAppropriateRadio
+                                                    .no),
+                                        groupValue: storageCtrl.charcter);
+                                  }),
+
+                              //!-------------------------------------------------------------------
+                              //? push in api object with id 90 if yes and 91 if no
+                              const LabelWidget(
+                                  label:
+                                      "Are there rodents in the bush store?"),
+                              GetBuilder<CamelrodentsRadioController>(
+                                  init: CamelrodentsRadioController(),
+                                  builder: (rodentsCtrl) {
+                                    return CamelFooderRadioWidget(
+                                        enumName: CamelrodentsRadio,
+                                        yesValue: CamelrodentsRadio.yes,
+                                        onChangedYes: (val) =>
+                                            rodentsCtrl.onChange(
+                                                val ?? CamelrodentsRadio.yes),
+                                        noValue: CamelrodentsRadio.no,
+                                        onChangedNo: (val) =>
+                                            rodentsCtrl.onChange(
+                                                val ?? CamelrodentsRadio.no),
+                                        groupValue: rodentsCtrl.charcter);
+                                  }),
+                            ],
+                          ),
+                      ],
+                    );
+                  }),
+              //? push in api object with id 92 if yes and 93 if no
+              const LabelWidget(label: "Are salt bars added?"),
+              GetBuilder<CamelSaltBarsRadioController>(
+                  init: CamelSaltBarsRadioController(),
+                  builder: (saltCtrl) {
+                    return CamelFooderRadioWidget(
+                        enumName: CamelSaltBarsRadio,
+                        yesValue: CamelSaltBarsRadio.yes,
+                        onChangedYes: (val) =>
+                            saltCtrl.onChange(val ?? CamelSaltBarsRadio.yes),
+                        noValue: CamelSaltBarsRadio.no,
+                        onChangedNo: (val) =>
+                            saltCtrl.onChange(val ?? CamelSaltBarsRadio.no),
+                        groupValue: saltCtrl.charcter);
+                  }),
+            ],
+          );
+        });
+  }
+}
