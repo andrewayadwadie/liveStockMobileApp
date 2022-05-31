@@ -33,7 +33,11 @@ class CamelBrucellosisWidget extends StatelessWidget {
                   noValue: CamelBrucellosisProgramRadio.no,
                   onChangedNo: (val) => farmPestCtrl
                       .onChange(val ?? CamelBrucellosisProgramRadio.no),
-                  groupValue: farmPestCtrl.charcter);
+                  groupValue: farmPestCtrl.charcter,
+                  noAnswerValue:CamelBrucellosisProgramRadio.noAnswer,
+                  onChangedNoAnswer: (val) => farmPestCtrl
+                      .onChange(val ?? CamelBrucellosisProgramRadio.noAnswer));
+               
             }),
         GetBuilder<DateController>(
             init: DateController(),

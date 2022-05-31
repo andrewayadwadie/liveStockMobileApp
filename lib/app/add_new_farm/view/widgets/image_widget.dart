@@ -20,17 +20,18 @@ class ImagesWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return path1 != ""
         ? Container(
-            width: MediaQuery.of(context).size.width /3,
+            width: MediaQuery.of(context).size.width /7,
             height: MediaQuery.of(context).size.height / 5,
+            padding: const EdgeInsets.all(3),
             margin: const EdgeInsets.symmetric(horizontal: 90, vertical: 20),
             decoration: BoxDecoration(
-                border: Border.all(width: 2, color: lightPrimaryColor),
+                border: Border.all(width: 2, color: redColor),
                 borderRadius: BorderRadius.circular(10)),
             child: Image.file(
               file1,
-              width: 120,
-              height: 100,
-              fit: BoxFit.contain,
+            //   width: MediaQuery.of(context).size.width /3,
+            // height: MediaQuery.of(context).size.height / 5,
+              fit: BoxFit.fill,
             ),
           )
         : Container(

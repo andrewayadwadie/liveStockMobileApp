@@ -12,7 +12,7 @@ class FarmTypeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 2),
       child: GetBuilder<FarmTypeController>(
           init: FarmTypeController(),
           builder: (controller) {

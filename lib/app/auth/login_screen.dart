@@ -196,8 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 if (res.runtimeType == List) {
                                   //    IsLogin.setIsLoginValue(true);
                                   TokenPref.setTokenValue(res[0].toString());
-                                  ExpireDatePref.setExpireDateValue(
-                                      res[1].toString());
+                       
 
                                   Get.offAll(() =>  HomeScreen());
                                 } else if (res.runtimeType == String) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CamelAntibioticsHavingController extends GetxController {
+class CamelWhoWillGiveAntibioticsHavingController extends GetxController {  
   List<String> antibioticsHavingList = [
     "subjective",
     "private vet",
@@ -15,7 +15,7 @@ class CamelAntibioticsHavingController extends GetxController {
   RxInt antibioticsHavingId = 0.obs;
 
   void onTapSelected(BuildContext con, int id, index) {
-    antibioticsHavingId.value = id;
+    antibioticsHavingId.value = id+1;
     Navigator.pop(con);
 
     antibioticsHavingText.value = antibioticsHavingList[index];

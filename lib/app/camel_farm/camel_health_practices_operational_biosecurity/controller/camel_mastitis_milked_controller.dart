@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 
 class CamelMastitisMilkedController extends GetxController {
   List<String> mastitisMilkedList = [
-    "With the herd without specifying",
-    "before milking the herd",
-    "After milking the herd",
+    "With the herd without specifying",//? push in api id 195
+    "before milking the herd",//? push in api id 196
+    "After milking the herd",//? push in api id 197
   ];
 
   RxString mastitisMilkedText =
@@ -14,7 +14,7 @@ class CamelMastitisMilkedController extends GetxController {
   RxInt mastitisMilkedId = 0.obs;
 
   void onTapSelected(BuildContext con, int id, index) {
-    mastitisMilkedId.value = id;
+    mastitisMilkedId.value = id+1;
     Navigator.pop(con);
 
     mastitisMilkedText.value = mastitisMilkedList[index];

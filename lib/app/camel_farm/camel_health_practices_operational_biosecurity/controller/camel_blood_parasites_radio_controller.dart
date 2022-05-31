@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 
-enum CamelbloodParasitesRadio { yes, no }
+enum CamelbloodParasitesRadio { yes, no,noAnswer }
 
 class CamelbloodParasitesRadioController extends GetxController {
-  CamelbloodParasitesRadio charcter = CamelbloodParasitesRadio.yes;
+  CamelbloodParasitesRadio charcter = CamelbloodParasitesRadio.noAnswer;
 
   void onChange(CamelbloodParasitesRadio value) {
     charcter = value;

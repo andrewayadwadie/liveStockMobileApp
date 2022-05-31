@@ -18,10 +18,11 @@ class FarmItemWidgetController extends GetxController {
   ];
 
   List items = [
-    "Camal",
     "Cow",
-    "Goat",
+    "Camal",
     "Sheep",
+    "Goat",
+    
     "horses",
     "Chicken",
   ];
@@ -42,7 +43,7 @@ class FarmItemWidgetController extends GetxController {
     //! check if clicked or not to avoid from multichoice
     isClicked = checkIfClicked(selectedColor);
     //! get choicedId to send it to api or onther screen
-    choicedId= getChoiceId( selectedColor);
+    choicedId = getChoiceId(selectedColor);
     log("coiced id = $choicedId");
     update();
   }
@@ -69,16 +70,39 @@ class FarmItemWidgetController extends GetxController {
     return false;
   }
 
-  int getChoiceId(List<bool>boolList){
+  int getChoiceId(List<bool> boolList) {
     for (var i = 0; i < boolList.length; i++) {
-      if(boolList[i]==true){
-        return i;
+      if (boolList[i] == true) {
+        return i + 1;
       }
     }
-    
+
     return 0;
   }
 
+  void reset() {
+    selectedColor = [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ];
+    afterColorSelected = [
+      primaryColor,
+      primaryColor,
+      primaryColor,
+      primaryColor,
+      primaryColor,
+      primaryColor,
+    ];
+    
+   isClicked = false;
+    choicedId = 0;
+    update();
+  }
+/*
   //! reset when double click
   void reset() {
     for (var i = 0; i < selectedColor.length; i++) {
@@ -94,5 +118,5 @@ class FarmItemWidgetController extends GetxController {
     }
     log("clicked");
     update();
-  }
+  }*/
 }

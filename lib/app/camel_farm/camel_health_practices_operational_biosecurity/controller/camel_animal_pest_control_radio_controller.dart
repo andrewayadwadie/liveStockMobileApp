@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 
-enum CamelInsectAnimalPestControlRadio { yes, no }
+enum CamelInsectAnimalPestControlRadio { yes, no,noAnswer }
 
 class CamelInsectAnimalPestControlRadioController extends GetxController {
   CamelInsectAnimalPestControlRadio charcter =
-      CamelInsectAnimalPestControlRadio.yes;
+      CamelInsectAnimalPestControlRadio.noAnswer;
 
   void onChange(CamelInsectAnimalPestControlRadio value) {
     charcter = value;

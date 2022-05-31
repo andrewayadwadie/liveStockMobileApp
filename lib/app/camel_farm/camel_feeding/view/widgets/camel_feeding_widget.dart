@@ -37,7 +37,7 @@ class CamelFeedingWidget extends StatelessWidget {
                     }),
                   ),
                   if (feedTypeCtrl.choicesBoolList.last == true)
-                    const CamelConcentratedFodderWidget()
+                      CamelConcentratedFodderWidget()
                 ],
               );
             })

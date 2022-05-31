@@ -2,10 +2,10 @@
 
 import 'package:get/get.dart';
 
-enum CamelCleanFloor { clean , unClean }
+enum CamelCleanFloor { clean , unClean,noAnswer }
 
 class CamelCleanFloorController extends GetxController {
-  CamelCleanFloor charcter = CamelCleanFloor.clean;
+  CamelCleanFloor charcter = CamelCleanFloor.noAnswer;
 
   void onChange(CamelCleanFloor value) {
     charcter = value;

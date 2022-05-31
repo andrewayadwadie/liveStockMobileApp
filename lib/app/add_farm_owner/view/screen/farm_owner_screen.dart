@@ -13,60 +13,60 @@ class FarmOwnerScreen extends StatelessWidget {
       onWillPop: () async {
         return false;
       },
-      child: Scaffold(
-        backgroundColor: offwhiteColor,
-        appBar: AppBar(
-          backgroundColor: whiteColor,
-          leading: IconButton(
-            onPressed: () => Get.back(),
-            icon: const Icon(Icons.arrow_back_ios),
-            color: primaryColor,
-          ),
-          title: const Center(
-            child: Text(
-              'New Farm',
-              style: TextStyle(
-                  color: primaryColor, fontWeight: FontWeight.bold, fontSize: 20),
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: offwhiteColor,
+          appBar: AppBar(
+            backgroundColor: whiteColor,
+            leading: IconButton(
+              onPressed: () => Get.back(),
+              icon: const Icon(Icons.arrow_back_ios),
+              color: primaryColor,
             ),
-          ),
-        ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height /  1.173,
-              // decoration:
-              //     BoxDecoration(border: Border.all(width: 2, color: redColor)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 30,
-                  ),
-                  //!Farm owner Title
-                  const Center(
-                    child: Text(
-                      "Farm Owner",
-                      style: TextStyle(
-                        color: primaryColor,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  //!farm Owner Body
-                  Container(
-                    width: MediaQuery.of(context).size.width / 1.1,
-                    height: MediaQuery.of(context).size.height / 1.4,
-                    decoration: const BoxDecoration(
-                        color: whiteColor,
-                        borderRadius:
-                            BorderRadius.only(topRight: Radius.circular(20))),
-                    child: FarmOwnerFormWidget(farmOwnerKey: _formKey),
-                  )
-                ],
+            title: const Center(
+              child: Text(
+                'New Farm',
+                style: TextStyle(
+                    color: primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
               ),
             ),
+          ),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 25,
+              ),
+              //!Farm owner Title
+              const Center(
+                child: Text(
+                  "Farm Owner",
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 35,
+              ),
+              //!farm Owner Body
+              Expanded(
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 1.1,
+                  height: MediaQuery.of(context).size.height / 1.3,
+                  decoration: const BoxDecoration(
+                      color: whiteColor,
+                      borderRadius:
+                          BorderRadius.only(topRight: Radius.circular(20))),
+                  child: FarmOwnerFormWidget(farmOwnerKey: _formKey),
+                ),
+              )
+            ],
           ),
         ),
       ),

@@ -10,21 +10,27 @@ import 'utils/translations/app_translations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+   await TokenPref.init();
   //await Firebase.initializeApp();
   await FarmOwnerNamePref.init();
-  await TokenPref.init();
-  await ExpireDatePref.init();
+ 
+  //!initialize the Farm shared preferences 
   await FarmOwnerPref.init();
   await FarmPref.init();
   await FarmAnimalTypePref.init();
+  //!initialize the Canmel Farm shared preferences
   await FarmCamelHerdPref.init();
-  await FarmCamelGeneralPref.init();
-  await FarmCamelHousingPref.init();
-  await FarmCamelFeedingPref.init();
-  await FarmCamelReproductionPref.init();
-  await FarmCamelMilkerPref.init();
-  await FarmCamelHealthPracticesPref.init();
+  await FarmCowHerdPref.init();
+  await FarmSheepHerdPref.init();
+ 
+  await  FarmCamelStatusPref.init();
+  await FarmCowStatusPref.init();
+  await FarmSheepStatusPref.init();
 
+ await FarmGoatHerdPref.init();
+ await FarmHorseHerdPref.init();
+ await FarmGoatStatusPref.init();
+ await FarmHorseStatusPref.init();
   runApp(const MyApp());
 }
 

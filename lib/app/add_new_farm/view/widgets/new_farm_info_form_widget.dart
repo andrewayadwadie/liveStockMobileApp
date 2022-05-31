@@ -57,7 +57,9 @@ class NewFarmInfoFormWidget extends StatelessWidget {
 
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'error';
+                      return 'You must enter a  Farm Name ';
+                    }else if(value.isNum){
+                      return 'Farm Name should not be a number';
                     }
                     return null;
                   }, // enabledBorder: InputBorder.none,
@@ -159,12 +161,7 @@ class NewFarmInfoFormWidget extends StatelessWidget {
                   child: ImagesWidget(
                       path1: imgCtrl.image.path, file1: imgCtrl.image));
             }),
-        //!Tools & tools Type
-
-        //*SPACE
-        SizedBox(
-          height: MediaQuery.of(context).size.height / 30,
-        ),
+      
       ],
     );
   }

@@ -25,7 +25,10 @@ class CamelBranNotExistWidget extends StatelessWidget {
                   noValue: CamelFarmUmberella.no,
                   onChangedNo: (val) =>
                       farmUmberellaCtrl.onChange(val ?? CamelFarmUmberella.no),
-                  groupValue: farmUmberellaCtrl.charcter);
+                  groupValue: farmUmberellaCtrl.charcter,
+                  noAnswerValue: CamelFarmUmberella.noAnswer,
+                  onChangedNoAnswer: (val) => farmUmberellaCtrl
+                      .onChange(val ?? CamelFarmUmberella.noAnswer));
             }),
       ],
     );

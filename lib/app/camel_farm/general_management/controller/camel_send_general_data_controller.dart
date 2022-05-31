@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:get/get.dart';
 
 import '../../../../utils/controller/current_location_controller.dart';
@@ -11,16 +12,20 @@ import '../../camel_housing/view/screen/camel_housing_scren.dart';
 import '../service/camel_send_general_data_service.dart';
 import 'camel_defenation_radio_controller.dart';
 import 'camel_distance_movement_controller.dart';
+import 'camel_exist_animal_controller.dart';
 import 'camel_general_checkbox_controller.dart';
 import 'camel_move_outside_radio_controller.dart';
 import 'camel_move_outsite_check_controller.dart';
 import 'camel_move_times_check_controller.dart';
 import 'camel_new_animal_bought_radio_controller.dart';
 import 'camel_reason_buying_new_animal_controller.dart';
+import 'camel_record_radio_controller.dart';
 import 'camel_send_camel_herd_data_controller.dart';
 import 'camel_source_buy_animal_controller.dart';
+import 'camel_textfield_controller.dart';
 import 'camel_time_buy_animal_controller.dart';
 import 'mix_checkbox_controller.dart';
+import 'mix_with_animals_controller.dart';
 import 'wild_radio_controller.dart';
 
 class CamelGeneralSendDataController extends GetxController {
@@ -79,18 +84,64 @@ class CamelGeneralSendDataController extends GetxController {
 
   CamelSourcesBuyingNewanimalController sourceNewId =
       Get.put(CamelSourcesBuyingNewanimalController());
+  CamelRecordController recordCtrl = Get.put(CamelRecordController());
 
   DateController dateCtrl = Get.put(DateController());
 
+  CamelTextFieldController textCtrl = Get.put(CamelTextFieldController());
+
+  CamelWithAnimalsController withAnimalsCtrl =
+      Get.put(CamelWithAnimalsController());
+
+  CamelAnimalExistController animalExistCtrl =
+      Get.put(CamelAnimalExistController());
+
   void fillAnswerListWithData() {
+    //!--------------------------
+    //* TextField
+
+    sendDataCtrl.addAnswer(id: 1, answer: textCtrl.workersNo);
+
+    sendDataCtrl.addAnswer(id: 309, answer: textCtrl.detectAnimal);
+
+    sendDataCtrl.addAnswer(id: 45, answer: textCtrl.animalCount);
+
     //!--------------------------
     //* Radio button
     if (camelDefenationCtrl.charcter == CamelDefenation.yes) {
       sendDataCtrl.addAnswer(id: 2, answer: "");
-    } else {
+    } else if (camelDefenationCtrl.charcter == CamelDefenation.no) {
       sendDataCtrl.addAnswer(id: 3, answer: "");
+    } else if (camelDefenationCtrl.charcter == CamelDefenation.noAnswer) {
+      sendDataCtrl.addAnswer(id: 310, answer: "");
     }
-
+    //!--------------------------
+    //* Radio button
+    if (recordCtrl.charcter == CamelRecord.yes) {
+      sendDataCtrl.addAnswer(id: 405, answer: "");
+    } else if (recordCtrl.charcter == CamelRecord.no) {
+      sendDataCtrl.addAnswer(id: 406, answer: "");
+    } else if (recordCtrl.charcter == CamelRecord.noAnswer) {
+      sendDataCtrl.addAnswer(id: 407, answer: "");
+    }
+    //!--------------------------
+    //* Radio button
+    if (withAnimalsCtrl.charcter == CamelWithAnimals.yes) {
+      sendDataCtrl.addAnswer(id: 408, answer: "");
+    } else if (withAnimalsCtrl.charcter == CamelWithAnimals.no) {
+      sendDataCtrl.addAnswer(id: 409, answer: "");
+    } else if (withAnimalsCtrl.charcter == CamelWithAnimals.noAnswer) {
+      sendDataCtrl.addAnswer(id: 410, answer: "");
+    }
+//!--------------------------
+    //* Radio button
+    if (animalExistCtrl.charcter == CamelAnimalExist.yes) {
+      sendDataCtrl.addAnswer(id: 441, answer: "");
+    } else if (animalExistCtrl.charcter == CamelAnimalExist.no) {
+      sendDataCtrl.addAnswer(id: 442, answer: "");
+    } else if (animalExistCtrl.charcter == CamelAnimalExist.noAnswer) {
+      sendDataCtrl.addAnswer(id: 443, answer: "");
+    }
     //!--------------------------
     //*check box
     if (record.choicesBoolList[0] == true) {
@@ -111,24 +162,34 @@ class CamelGeneralSendDataController extends GetxController {
     if (record.choicesBoolList[5] == true) {
       sendDataCtrl.addAnswer(id: 9, answer: "");
     }
+
     if (record.choicesBoolList[6] == true) {
       sendDataCtrl.addAnswer(id: 10, answer: "");
     }
+    if (record.choicesBoolList.where((e) => e == true).isEmpty) {
+      sendDataCtrl.addAnswer(id: 311, answer: "");
+    }
+
     //!--------------------------
     //* Radio button
     if (wildCtrl.charcter == CamelWild.yes) {
       sendDataCtrl.addAnswer(id: 11, answer: "");
-    } else {
+    } else if (wildCtrl.charcter == CamelWild.no) {
       sendDataCtrl.addAnswer(id: 12, answer: "");
+    } else if (wildCtrl.charcter == CamelWild.noAnswer) {
+      sendDataCtrl.addAnswer(id: 312, answer: "");
     }
+
     //!--------------------------
     //*check box
     if (mixcheck.choicesBoolList[0] == true) {
       sendDataCtrl.addAnswer(id: 13, answer: "");
     }
+
     if (mixcheck.choicesBoolList[1] == true) {
       sendDataCtrl.addAnswer(id: 14, answer: "");
     }
+
     if (mixcheck.choicesBoolList[2] == true) {
       sendDataCtrl.addAnswer(id: 15, answer: "");
     }
@@ -138,12 +199,17 @@ class CamelGeneralSendDataController extends GetxController {
     if (mixcheck.choicesBoolList[4] == true) {
       sendDataCtrl.addAnswer(id: 17, answer: "");
     }
+    if (mixcheck.choicesBoolList.where((e) => e == true).isEmpty) {
+      sendDataCtrl.addAnswer(id: 313, answer: "");
+    }
     //!--------------------------
     //* Radio button
     if (moveCtrl.charcter == CamelMoveOutside.yes) {
       sendDataCtrl.addAnswer(id: 18, answer: "");
-    } else {
+    } else if (moveCtrl.charcter == CamelMoveOutside.no) {
       sendDataCtrl.addAnswer(id: 19, answer: "");
+    } else if (moveCtrl.charcter == CamelMoveOutside.noAnswer) {
+      sendDataCtrl.addAnswer(id: 314, answer: "");
     }
     //!--------------------------
     //*check box
@@ -162,96 +228,123 @@ class CamelGeneralSendDataController extends GetxController {
     if (moveCheck.choicesBoolList[4] == true) {
       sendDataCtrl.addAnswer(id: 24, answer: "");
     }
-    if (moveCheck.choicesBoolList[5] == true) {
-      sendDataCtrl.addAnswer(id: 25, answer: "");
+    if (moveCheck.choicesBoolList[5] == true) {}
+    if (moveCheck.choicesBoolList.where((e) => e == true).isEmpty) {
+      sendDataCtrl.addAnswer(id: 315, answer: "");
     }
     //!--------------------------
-    //* Radio button
+    //*check box
     if (moveTimesCtrl.choicesBoolList[0] == true) {
       sendDataCtrl.addAnswer(id: 26, answer: "");
     }
     if (moveTimesCtrl.choicesBoolList[1] == true) {
       sendDataCtrl.addAnswer(id: 27, answer: "");
     }
+    if (moveTimesCtrl.choicesBoolList.where((e) => e == true).isEmpty) {
+      sendDataCtrl.addAnswer(id: 316, answer: "");
+    }
 
     //!--------------------------
     //* dropdown
-    if (distanceMovementCtrl.distanceId.value == 0) {
+    if (distanceMovementCtrl.distanceId.value == 1) {
       sendDataCtrl.addAnswer(id: 28, answer: "");
     }
-    if (distanceMovementCtrl.distanceId.value == 1) {
+    if (distanceMovementCtrl.distanceId.value == 2) {
       sendDataCtrl.addAnswer(id: 29, answer: "");
     }
-    if (distanceMovementCtrl.distanceId.value == 2) {
+    if (distanceMovementCtrl.distanceId.value == 3) {
       sendDataCtrl.addAnswer(id: 30, answer: "");
+    }
+    if (distanceMovementCtrl.distanceText.value == 'Camel distance movement') {
+      sendDataCtrl.addAnswer(id: 317, answer: "");
     }
     //!--------------------------
     //* Radio button
     if (newanimal.charcter == CamelNewAnimalBought.yes) {
       sendDataCtrl.addAnswer(id: 31, answer: "");
-    } else {
+    } else if (newanimal.charcter == CamelNewAnimalBought.no) {
       sendDataCtrl.addAnswer(id: 32, answer: "");
+    } else if (newanimal.charcter == CamelNewAnimalBought.noAnswer) {
+      sendDataCtrl.addAnswer(id: 318, answer: "");
     }
 
     //!--------------------------
     //*dropdown
-    if (reasonBuyingNewanimalCtrl.buyNewId.value == 0) {
+    if (reasonBuyingNewanimalCtrl.buyNewId.value == 1) {
       sendDataCtrl.addAnswer(id: 33, answer: "");
     }
-    if (reasonBuyingNewanimalCtrl.buyNewId.value == 1) {
+    if (reasonBuyingNewanimalCtrl.buyNewId.value == 2) {
       sendDataCtrl.addAnswer(id: 34, answer: "");
     }
-    if (reasonBuyingNewanimalCtrl.buyNewId.value == 2) {
+    if (reasonBuyingNewanimalCtrl.buyNewId.value == 3) {
       sendDataCtrl.addAnswer(id: 35, answer: "");
+    }
+    if (reasonBuyingNewanimalCtrl.buyNewText.value ==
+        'reason to buy New animal') {
+      sendDataCtrl.addAnswer(id: 319, answer: "");
     }
     //????????????????????????????????????????????????????????????????????
     //!--------------------------
     //*dropdown
-    if (timesBuyingNewanimalCtrl.timesNewId.value == 0) {
+    if (timesBuyingNewanimalCtrl.timesNewId.value == 1) {
       sendDataCtrl.addAnswer(id: 36, answer: "");
     }
-    if (timesBuyingNewanimalCtrl.timesNewId.value == 1) {
+    if (timesBuyingNewanimalCtrl.timesNewId.value == 2) {
       sendDataCtrl.addAnswer(id: 37, answer: "");
     }
-    if (timesBuyingNewanimalCtrl.timesNewId.value == 2) {
+    if (timesBuyingNewanimalCtrl.timesNewId.value == 3) {
       sendDataCtrl.addAnswer(id: 38, answer: "");
     }
-    if (timesBuyingNewanimalCtrl.timesNewId.value == 3) {
+    if (timesBuyingNewanimalCtrl.timesNewId.value == 4) {
       sendDataCtrl.addAnswer(id: 39, answer: "");
+    }
+    if (timesBuyingNewanimalCtrl.timesNewText.value ==
+        'What are the times to buy animals?') {
+      sendDataCtrl.addAnswer(id: 320, answer: "");
     }
     //!--------------------------
     //*dropdown
-    if (sourceNewId.sourceNewId.value == 0) {
+    if (sourceNewId.sourceNewId.value == 1) {
       sendDataCtrl.addAnswer(id: 40, answer: "");
     }
-    if (sourceNewId.sourceNewId.value == 1) {
+    if (sourceNewId.sourceNewId.value == 2) {
       sendDataCtrl.addAnswer(id: 41, answer: "");
     }
-    if (sourceNewId.sourceNewId.value == 2) {
+    if (sourceNewId.sourceNewId.value == 3) {
       sendDataCtrl.addAnswer(id: 42, answer: "");
     }
-    if (sourceNewId.sourceNewId.value == 3) {
+    if (sourceNewId.sourceNewId.value == 4) {
       sendDataCtrl.addAnswer(id: 43, answer: "");
+    }
+    if (sourceNewId.sourceNewText.value ==
+        'What are the sources of animal purchase?') {
+      sendDataCtrl.addAnswer(id: 321, answer: "");
     }
     //!--------------------------
     //* Date
     sendDataCtrl.addAnswer(
         id: 44,
-        answer:
-            "${dateCtrl.date.year}-${dateCtrl.date.month}-${dateCtrl.date.day} ");
+        answer: dateCtrl.date.year == 2016 &&
+                dateCtrl.date.month == 10 &&
+                dateCtrl.date.day == 26
+            ? ""
+            : "${dateCtrl.date.year}-${dateCtrl.date.month}-${dateCtrl.date.day} ");
     //!--------------------------
-
-    log("answer 1 : ${sendDataCtrl.answers}");
   }
 
-  void sendData() async {
+  void sendData(BuildContext context) async {
+    log("general : ${sendDataCtrl.answers}");
+    showDialog(
+        context: context,
+        builder: (context) => FutureProgressDialog(
+            SendCamelGeneralDataService.sendCamelGeneralDataService(
+                data: sendDataCtrl.answers)));
     var res = await SendCamelGeneralDataService.sendCamelGeneralDataService(
         data: sendDataCtrl.answers);
-    if (res==200) {
-      FarmCamelGeneralPref.setCamelGeneralValue(FarmCamelHerdPref.getCamelHerdValue());
+    if (res == 200) {
+      FarmCamelStatusPref.setCamelStatusValue(1);
 
-      Get.offAll(() => CamelHousingScreen(
-          generalId:  FarmCamelHerdPref.getCamelHerdValue()));
+      Get.offAll(() => CamelHousingScreen());
     } else if (res == 401) {
       sendDataCtrl.answers.clear();
       Get.offAll(() => const LoginScreen());

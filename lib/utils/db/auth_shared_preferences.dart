@@ -18,36 +18,8 @@ class TokenPref {
   }
 
   static Future clearToken() async {
-    await _loginPreferences!.clear();
+    await _loginPreferences!.remove(_token);
   }
-
-/*---------------------------------------------------------------------- */
-
-}
-
-class ExpireDatePref {
-  static SharedPreferences? _expireDatePreferences;
-  static const _expireDate = 'expiredate';
-
-  static Future init() async {
-    _expireDatePreferences = await SharedPreferences.getInstance();
-  }
-
-/*------------------------------- Expire Date---------------------------- */
-  static Future setExpireDateValue(String value) async {
-    await _expireDatePreferences!.setString(_expireDate, value);
-  }
-
-  static String getExpireDateValue() {
-    return _expireDatePreferences!.getString(_expireDate)!;
-  }
-
-  static Future clearExpireDate() async {
-    await _expireDatePreferences!.clear();
-  }
-
-/*---------------------------------------------------------------------- */
-
 }
 
 class FarmOwnerPref {
@@ -67,13 +39,12 @@ class FarmOwnerPref {
     return _framOwnerPrefrences!.getInt(_owner) ?? 0;
   }
 
-  static Future clearOwner() async {
-    await _framOwnerPrefrences!.clear();
+  static Future clearOwner( ) async {
+    //await _framOwnerPrefrences!.clear();
+    await _framOwnerPrefrences!.remove(_owner);
   }
-
-/*---------------------------------------------------------------------- */
-
 }
+
 class FarmOwnerNamePref {
   static SharedPreferences? _framOwnerNamePrefrences;
   static const _ownerName = 'OwnerName';
@@ -88,20 +59,17 @@ class FarmOwnerNamePref {
   }
 
   static String getOwnerNameValue() {
-    return _framOwnerNamePrefrences!.getString(_ownerName) ??"";
+    return _framOwnerNamePrefrences!.getString(_ownerName) ?? "";
   }
 
   static Future clearOwnerName() async {
-    await _framOwnerNamePrefrences!.clear();
+    await _framOwnerNamePrefrences!.remove(_ownerName);
   }
-
-/*---------------------------------------------------------------------- */
-
 }
 
 class FarmPref {
   static SharedPreferences? _framPrefrences;
-  static const _ = 'farm';
+  static const _farmkey = 'farm';
 
   static Future init() async {
     _framPrefrences = await SharedPreferences.getInstance();
@@ -109,19 +77,16 @@ class FarmPref {
 
 /*------------------------------- ---------------------------- */
   static Future setValue(int value) async {
-    await _framPrefrences!.setInt(_, value);
+    await _framPrefrences!.setInt(_farmkey, value);
   }
 
   static int getValue() {
-    return _framPrefrences!.getInt(_) ?? 0;
+    return _framPrefrences!.getInt(_farmkey) ?? 0;
   }
 
   static Future clear() async {
-    await _framPrefrences!.clear();
+    await _framPrefrences!.remove(_farmkey);
   }
-
-/*---------------------------------------------------------------------- */
-
 }
 
 class FarmAnimalTypePref {
@@ -142,11 +107,8 @@ class FarmAnimalTypePref {
   }
 
   static Future clearAnimalType() async {
-    await _framAnimalTypePrefrences!.clear();
+    await _framAnimalTypePrefrences!.remove(_animalType);
   }
-
-/*---------------------------------------------------------------------- */
-
 }
 
 class FarmCamelHerdPref {
@@ -167,159 +129,208 @@ class FarmCamelHerdPref {
   }
 
   static Future clearCamelHerd() async {
-    await _framcamelHerdPrefrences!.clear();
+    await _framcamelHerdPrefrences!.remove(_camelHerd);
   }
-
-/*---------------------------------------------------------------------- */
-
 }
 
-
-class FarmCamelGeneralPref {
-  static SharedPreferences? _framcamelGeneralPrefrences;
-  static const _camelGeneral = 'camelGeneral';
+class FarmCowHerdPref {
+  static SharedPreferences? _framCowHerdPrefrences;
+  static const _cowHerd = 'CowHerd';
 
   static Future init() async {
-    _framcamelGeneralPrefrences = await SharedPreferences.getInstance();
+    _framCowHerdPrefrences = await SharedPreferences.getInstance();
   }
 
-/*------------------------------- camelGeneral---------------------------- */
-  static Future setCamelGeneralValue(int value) async {
-    await _framcamelGeneralPrefrences!.setInt(_camelGeneral, value);
+/*------------------------------- CowHerd---------------------------- */
+  static Future setCowHerdValue(int value) async {
+    await _framCowHerdPrefrences!.setInt(_cowHerd, value);
   }
 
-  static int getCamelGeneralValue() {
-    return _framcamelGeneralPrefrences!.getInt(_camelGeneral) ?? 0;
+  static int getCowHerdValue() {
+    return _framCowHerdPrefrences!.getInt(_cowHerd) ?? 0;
   }
 
-  static Future clearCamelGeneral() async {
-    await _framcamelGeneralPrefrences!.clear();
+  static Future clearCowHerd() async {
+    await _framCowHerdPrefrences!.remove(_cowHerd);
   }
-
-/*---------------------------------------------------------------------- */
-
 }
 
-
-class FarmCamelHousingPref {
-  static SharedPreferences? _framcamelHousingPrefrences;
-  static const _camelHousing = 'camelHousing';
+class FarmSheepHerdPref {
+  static SharedPreferences? _framSheepHerdPrefrences;
+  static const _sheepHerd = 'SheepHerd';
 
   static Future init() async {
-    _framcamelHousingPrefrences = await SharedPreferences.getInstance();
+    _framSheepHerdPrefrences = await SharedPreferences.getInstance();
   }
 
-/*------------------------------- camelHousing---------------------------- */
-  static Future setCamelHousingValue(int value) async {
-    await _framcamelHousingPrefrences!.setInt(_camelHousing, value);
+/*------------------------------- SheepHerd---------------------------- */
+  static Future setSheepHerdValue(int value) async {
+    await _framSheepHerdPrefrences!.setInt(_sheepHerd, value);
   }
 
-  static int getCamelHousingValue() {
-    return _framcamelHousingPrefrences!.getInt(_camelHousing) ?? 0;
+  static int getSheepHerdValue() {
+    return _framSheepHerdPrefrences!.getInt(_sheepHerd) ?? 0;
   }
 
-  static Future clearCamelHousing() async {
-    await _framcamelHousingPrefrences!.clear();
+  static Future clearSheepHerd() async {
+    await _framSheepHerdPrefrences!.remove(_sheepHerd);
   }
-
-/*---------------------------------------------------------------------- */
-
 }
 
-class FarmCamelFeedingPref {
-  static SharedPreferences? _framcamelFeedingPrefrences;
-  static const _camelFeeding = 'camelFeeding';
+class FarmGoatHerdPref {
+  static SharedPreferences? _framGoatHerdPrefrences;
+  static const _goatHerd = 'GoatHerd';
 
   static Future init() async {
-    _framcamelFeedingPrefrences = await SharedPreferences.getInstance();
+    _framGoatHerdPrefrences = await SharedPreferences.getInstance();
   }
 
-/*------------------------------- camelFeeding---------------------------- */
-  static Future setCamelFeedingValue(int value) async {
-    await _framcamelFeedingPrefrences!.setInt(_camelFeeding, value);
+/*------------------------------- GoatHerd---------------------------- */
+  static Future setGoatHerdValue(int value) async {
+    await _framGoatHerdPrefrences!.setInt(_goatHerd, value);
   }
 
-  static int getCamelFeedingValue() {
-    return _framcamelFeedingPrefrences!.getInt(_camelFeeding) ?? 0;
+  static int getGoatHerdValue() {
+    return _framGoatHerdPrefrences!.getInt(_goatHerd) ?? 0;
   }
 
-  static Future clearCamelFeeding() async {
-    await _framcamelFeedingPrefrences!.clear();
+  static Future clearGoatHerd() async {
+    await _framGoatHerdPrefrences!.remove(_goatHerd);
   }
-
-/*---------------------------------------------------------------------- */
-
 }
-class FarmCamelReproductionPref {
-  static SharedPreferences? _framcamelReproductionPrefrences;
-  static const _camelReproduction = 'camelReproduction';
+class FarmHorseHerdPref {
+  static SharedPreferences? _framHorseHerdPrefrences;
+  static const _horseHerd = 'HorseHerd';
 
   static Future init() async {
-    _framcamelReproductionPrefrences = await SharedPreferences.getInstance();
+    _framHorseHerdPrefrences = await SharedPreferences.getInstance();
   }
 
-/*------------------------------- camelReproduction---------------------------- */
-  static Future setCamelReproductionValue(int value) async {
-    await _framcamelReproductionPrefrences!.setInt(_camelReproduction, value);
+/*------------------------------- HorseHerd---------------------------- */
+  static Future setHorseHerdValue(int value) async {
+    await _framHorseHerdPrefrences!.setInt(_horseHerd, value);
   }
 
-  static int getCamelReproductionValue() {
-    return _framcamelReproductionPrefrences!.getInt(_camelReproduction) ?? 0;
+  static int getHorseHerdValue() {
+    return _framHorseHerdPrefrences!.getInt(_horseHerd) ?? 0;
   }
 
-  static Future clearCamelReproduction() async {
-    await _framcamelReproductionPrefrences!.clear();
+  static Future clearHorseHerd() async {
+    await _framHorseHerdPrefrences!.remove(_horseHerd);
   }
-
-/*---------------------------------------------------------------------- */
-
 }
 
-class FarmCamelMilkerPref {
-  static SharedPreferences? _framcamelMilkerPrefrences;
-  static const _camelMilker = 'camelMilker';
+
+ 
+class FarmCamelStatusPref {
+  static SharedPreferences? _framCamelStatusPrefrences;
+  static const _camelstatus = 'CamelStatus';
 
   static Future init() async {
-    _framcamelMilkerPrefrences = await SharedPreferences.getInstance();
+    _framCamelStatusPrefrences = await SharedPreferences.getInstance();
   }
 
-/*------------------------------- camelMilker---------------------------- */
-  static Future setCamelMilkerValue(int value) async {
-    await _framcamelMilkerPrefrences!.setInt(_camelMilker, value);
+/*------------------------------- CamelStatus---------------------------- */
+  static Future setCamelStatusValue(int value) async {
+    await _framCamelStatusPrefrences!.setInt(_camelstatus, value);
   }
 
-  static int getCamelMilkerValue() {
-    return _framcamelMilkerPrefrences!.getInt(_camelMilker) ?? 0;
+  static int getCamelStatusValue() {
+    return _framCamelStatusPrefrences!.getInt(_camelstatus) ?? 0;
   }
 
-  static Future clearCamelMilker() async {
-    await _framcamelMilkerPrefrences!.clear();
+  static Future clearCamelStatus() async {
+    await _framCamelStatusPrefrences!.remove(_camelstatus );
   }
-
-/*---------------------------------------------------------------------- */
-
 }
-class FarmCamelHealthPracticesPref {
-  static SharedPreferences? _framcamelHealthPracticesPrefrences;
-  static const _camelHealthPractices = 'camelHealthPractices';
+
+class FarmCowStatusPref {
+  static SharedPreferences? _framCowStatusPrefrences;
+  static const _cowstatus = 'CowStatus';
 
   static Future init() async {
-    _framcamelHealthPracticesPrefrences = await SharedPreferences.getInstance();
+    _framCowStatusPrefrences = await SharedPreferences.getInstance();
   }
 
-/*------------------------------- camelHealthPractices---------------------------- */
-  static Future setCamelHealthPracticesValue(int value) async {
-    await _framcamelHealthPracticesPrefrences!.setInt(_camelHealthPractices, value);
+/*------------------------------- CowStatus---------------------------- */
+  static Future setCowStatusValue(int value) async {
+    await _framCowStatusPrefrences!.setInt(_cowstatus, value);
   }
 
-  static int getCamelHealthPracticesValue() {
-    return _framcamelHealthPracticesPrefrences!.getInt(_camelHealthPractices) ?? 0;
+  static int getCowStatusValue() {
+    return _framCowStatusPrefrences!.getInt(_cowstatus) ?? 0;
   }
 
-  static Future clearCamelHealthPractices() async {
-    await _framcamelHealthPracticesPrefrences!.clear();
+  static Future clearCowStatus() async {
+    await _framCowStatusPrefrences!.remove(_cowstatus);
   }
-
-/*---------------------------------------------------------------------- */
-
 }
+
+class FarmSheepStatusPref {
+  static SharedPreferences? _framSheepStatusPrefrences;
+  static const _sheepstatus = 'SheepStatus';
+
+  static Future init() async {
+    _framSheepStatusPrefrences = await SharedPreferences.getInstance();
+  }
+
+/*------------------------------- SheepStatus---------------------------- */
+  static Future setSheepStatusValue(int value) async {
+    await _framSheepStatusPrefrences!.setInt(_sheepstatus, value);
+  }
+
+  static int getSheepStatusValue() {
+    return _framSheepStatusPrefrences!.getInt(_sheepstatus) ?? 0;
+  }
+
+  static Future clearSheepStatus() async {
+    await _framSheepStatusPrefrences!.remove(_sheepstatus);
+  }
+}
+
+class FarmGoatStatusPref {
+  static SharedPreferences? _framGoatStatusPrefrences;
+  static const _goatstatus = 'GoatStatus';
+
+  static Future init() async {
+    _framGoatStatusPrefrences = await SharedPreferences.getInstance();
+  }
+
+/*------------------------------- GoatStatus---------------------------- */
+  static Future setGoatStatusValue(int value) async {
+    await _framGoatStatusPrefrences!.setInt(_goatstatus, value);
+  }
+
+  static int getGoatStatusValue() {
+    return _framGoatStatusPrefrences!.getInt(_goatstatus) ?? 0;
+  }
+
+  static Future clearGoatStatus() async {
+    await _framGoatStatusPrefrences!.remove(_goatstatus);
+  }
+}
+class FarmHorseStatusPref {
+  static SharedPreferences? _framHorseStatusPrefrences;
+  static const _horsestatus = 'HorseStatus';
+
+  static Future init() async {
+    _framHorseStatusPrefrences = await SharedPreferences.getInstance();
+  }
+
+/*------------------------------- HorseStatus---------------------------- */
+  static Future setHorseStatusValue(int value) async {
+    await _framHorseStatusPrefrences!.setInt(_horsestatus, value);
+  }
+
+  static int getHorseStatusValue() {
+    return _framHorseStatusPrefrences!.getInt(_horsestatus) ?? 0;
+  }
+
+  static Future clearHorseStatus() async {
+    await _framHorseStatusPrefrences!.remove(_horsestatus);
+  }
+}
+
+
+
+

@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 
-enum CamelSymptomsBeforeAbortionRadio { yes, no }
+enum CamelSymptomsBeforeAbortionRadio { yes, no,noAnswer }
 
 class CamelSymptomsBeforeAbortionRadioController extends GetxController {
   CamelSymptomsBeforeAbortionRadio charcter =
-      CamelSymptomsBeforeAbortionRadio.yes;
+      CamelSymptomsBeforeAbortionRadio.noAnswer;
 
   void onChange(CamelSymptomsBeforeAbortionRadio value) {
     charcter = value;

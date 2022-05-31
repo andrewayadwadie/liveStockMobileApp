@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../utils/db/auth_shared_preferences.dart';
 import '../../utils/style.dart';
-import '../add_new_farm/service/tools_service.dart';
+import '../add_new_farm/service/government_service.dart';
 import '../auth/login_screen.dart';
 import '../home/home_screen.dart';
 import '../shared_widgets/no_internet_screen.dart';
@@ -36,7 +36,28 @@ class _IntroPageState extends State<IntroPage> with TickerProviderStateMixin {
         .then(
           (value2) => Future.delayed(const Duration(seconds: 1)).then(
             (value3) => _lottieAnimation.forward().then(
-                  (value4) => ToolsService.getAllTools().then((checkValue) {
+                  (value4) =>GovernmentService.getGovernment().then((checkValue) {
+                    log("checkValue in intro is :  $checkValue");
+                    if (checkValue == 401) {
+                      Get.offAll(const LoginScreen());
+                    } else if (checkValue.runtimeType == List) {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) {
+                        return TokenPref.getTokenValue().isEmpty
+                            ? const LoginScreen()
+                            : HomeScreen();
+                      }), (route) => false);
+                    } else if (checkValue == 500) {
+                      Get.offAll(const NoInternetScreen());
+                    }else{
+                      Get.offAll(const NoInternetScreen());
+                    }
+                    
+                  }
+                  
+                  
+                  /*
+                   ToolsService.getAllTools().then((checkValue) {
                     log("$checkValue");
                     if (checkValue == 401) {
                       Get.offAll(const LoginScreen());
@@ -50,7 +71,9 @@ class _IntroPageState extends State<IntroPage> with TickerProviderStateMixin {
                     } else if (checkValue == 500) {
                       Get.offAll(const NoInternetScreen());
                     }
-                  }),
+                  }
+                  */
+                  ),
                 ),
           ),
         );

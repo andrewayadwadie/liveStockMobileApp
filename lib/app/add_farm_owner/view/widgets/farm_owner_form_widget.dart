@@ -1,7 +1,8 @@
 import 'dart:developer';
-
+ 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:get/get.dart';
 
 import '../../../../utils/controller/click_controller.dart';
@@ -225,10 +226,8 @@ class FarmOwnerFormWidget extends StatelessWidget {
                             }, // enabledBorder: InputBorder.none,
                           ),
                         ),
-                        //*space
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 10,
-                        ),
+             
+                       
                       ],
                     ),
                   ),
@@ -239,17 +238,30 @@ class FarmOwnerFormWidget extends StatelessWidget {
                         init: ClickController(),
                         builder: (click) {
                           return InkWell(
-                            onTap: () async {
-                              if (farmOwnerKey.currentState!.validate()) {
-                                farmOwnerKey.currentState!.save();
-                                log("next button clicked");
-                                if (click.clicked == false) {
+                              onTap: () async {
+                                if (farmOwnerKey.currentState!.validate()) {
+                                  farmOwnerKey.currentState!.save();
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) =>
+                                          FutureProgressDialog(
+                                              SendOwnerData.sendOwnerData(
+                                                  name: ctrl.name ?? "",
+                                                  phone: ctrl.phone ?? 0,
+                                                  email: ctrl.email ?? "",
+                                                  address: ctrl.address ?? "",
+                                                  id: ctrl.id ?? 0),
+                                                  
+                                                  ));
+                                  
+
                                   var res = await SendOwnerData.sendOwnerData(
                                       name: ctrl.name ?? "",
                                       phone: ctrl.phone ?? 0,
                                       email: ctrl.email ?? "",
                                       address: ctrl.address ?? "",
                                       id: ctrl.id ?? 0);
+                                      
                                   if (res.runtimeType == double) {
                                     FarmOwnerPref.setOwnerValue(res.toInt());
                                     log(" farm id = ${FarmOwnerPref.getOwnerValue()}");
@@ -272,7 +284,6 @@ class FarmOwnerFormWidget extends StatelessWidget {
                                         color: Colors.white,
                                       ),
                                     );
-                                    click.changeClick();
                                   }
 
                                   //! error
@@ -290,28 +301,13 @@ class FarmOwnerFormWidget extends StatelessWidget {
                                     click.changeClick();
                                   }
                                 }
-                              }
-                            },
-                            child: SizedBox(
-                              child: click.clicked == false
-                                  ? SvgPicture.asset(
-                                      "assets/icons/next_button.svg",
-                                      width: MediaQuery.of(context).size.width /
-                                          12,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              12,
-                                    )
-                                  : SvgPicture.asset(
-                                      "assets/icons/next_grey.svg",
-                                      width: MediaQuery.of(context).size.width /
-                                          12,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              12,
-                                    ),
-                            ),
-                          );
+                              },
+                              child: SizedBox(
+                                  child: SvgPicture.asset(
+                                "assets/icons/next_button.svg",
+                                width: MediaQuery.of(context).size.width / 10,
+                                height: MediaQuery.of(context).size.height / 10,
+                              )));
                         }),
                   ),
                 ],

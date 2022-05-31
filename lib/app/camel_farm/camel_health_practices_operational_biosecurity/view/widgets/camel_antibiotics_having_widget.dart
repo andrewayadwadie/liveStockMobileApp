@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../utils/style.dart';
-import '../../controller/camel_antibiotics_Having_controller.dart';
+import '../../controller/camel_antibiotics_having_controller.dart';
  
 class CamelAntibioticsHavingWidget extends StatelessWidget {
   const CamelAntibioticsHavingWidget({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CamelAntibioticsHavingController>(
-        init: CamelAntibioticsHavingController(),
+    return GetBuilder<CamelWhoWillGiveAntibioticsHavingController>(
+        init: CamelWhoWillGiveAntibioticsHavingController(),
         builder: (controller) {
           return GestureDetector(
               onTap: () {

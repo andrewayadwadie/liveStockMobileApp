@@ -1,8 +1,9 @@
 import 'dart:developer';
 
-import 'package:animal_wealth/app/camel_farm/camel_immunization_new/services/camel_immunization_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../services/camel_immunization_service.dart';
 
 class CamelGetImmunizationsController extends GetxController {
   @override

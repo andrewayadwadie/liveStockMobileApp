@@ -14,7 +14,7 @@ class CamelFertilizationMethodController extends GetxController {
   RxInt fertilizationMethodId = 0.obs;
 
   void onTapSelected(BuildContext con, int id, index) {
-    fertilizationMethodId.value = id;
+    fertilizationMethodId.value = id+1;
     Navigator.pop(con);
 
     fertilizationMethodText.value = fertilizationMethodList[index];

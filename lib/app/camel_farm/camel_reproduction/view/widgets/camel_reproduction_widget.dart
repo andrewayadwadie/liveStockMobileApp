@@ -7,6 +7,7 @@ import '../../controller/camel_artificial_radio_controller.dart';
 import '../../controller/camel_difficulty_pregnancy_radio_controller.dart';
 import '../../controller/camel_obstructed_labor_radio_controller.dart';
 import '../../controller/camel_reproduction_radio_controller.dart';
+import '../../controller/camel_reproduction_textfeild_controller.dart';
 import '../../controller/camel_semen_source_controller.dart';
 import '../../controller/camel_unsatisfactory_abortion_radio_controller.dart';
 import 'camel_breed_type_widget.dart';
@@ -17,9 +18,10 @@ import 'camel_reproduction_textfield_widget.dart';
 import 'camel_reproduction_way_widget.dart';
 import 'camel_semen_souce_radio_widget.dart';
 
+// ignore: must_be_immutable
 class CamelReproductionWidget extends StatelessWidget {
-  const CamelReproductionWidget({Key? key}) : super(key: key);
-
+    CamelReproductionWidget({Key? key}) : super(key: key);
+CamelReproductionTextFieldController  reproductionTextFieldCtrl = Get.put(CamelReproductionTextFieldController());
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SendCamelHerdDataController>(
@@ -42,7 +44,11 @@ class CamelReproductionWidget extends StatelessWidget {
                             noValue: CamelReproductionRadio.no,
                             onChangedNo: (val) => reproCtrl
                                 .onChange(val ?? CamelReproductionRadio.no),
-                            groupValue: reproCtrl.charcter),
+                            groupValue: reproCtrl.charcter,
+                             noAnswerValue:CamelReproductionRadio .noAnswer,
+                            onChangedNoAnswer: (val) => reproCtrl
+                                .onChange(val ??CamelReproductionRadio .noAnswer),
+                            ),
                         if (reproCtrl.charcter == CamelReproductionRadio.yes)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +80,13 @@ class CamelReproductionWidget extends StatelessWidget {
                             noValue: CamelArtificialRadio.no,
                             onChangedNo: (val) => artCtrl
                                 .onChange(val ?? CamelArtificialRadio.no),
-                            groupValue: artCtrl.charcter),
+                            groupValue: artCtrl.charcter,
+                            noAnswerValue:CamelArtificialRadio .noAnswer,
+                            onChangedNoAnswer: (val) => artCtrl
+                                .onChange(val ??CamelArtificialRadio .noAnswer),
+                          
+                            
+                            ),
                         if (artCtrl.charcter == CamelArtificialRadio.yes)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +115,14 @@ class CamelReproductionWidget extends StatelessWidget {
                                                 semenCtrl.onChange(val ??
                                                     CamelSemenSourceRadio
                                                         .importation),
-                                            groupValue: semenCtrl.charcter),
+                                            groupValue: semenCtrl.charcter,
+                                            noAnswerValue: CamelSemenSourceRadio.noAnswer,
+                                            onChangedNoAnswer: (val) =>
+                                                semenCtrl.onChange(val ??
+                                                    CamelSemenSourceRadio
+                                                        .noAnswer),
+                                            
+                                            ),
                                         if (semenCtrl.charcter ==
                                             CamelSemenSourceRadio.importation)
                                           Column(
@@ -115,7 +134,9 @@ class CamelReproductionWidget extends StatelessWidget {
                                                       "What is the importing country?"),
                                               CamelReproductionTextFieldWidget(
                                                   title: "importing country :",
-                                                  onNoteChange: (val) {})
+                                                  onNoteChange: (val) {
+                                                   reproductionTextFieldCtrl.onChangeImportingCounrty(val??"");
+                                                  })
                                             ],
                                           )
                                       ],
@@ -149,7 +170,13 @@ class CamelReproductionWidget extends StatelessWidget {
                             noValue: CamelDifficultyPregnancyRadio.no,
                             onChangedNo: (val) => diffCtrl.onChange(
                                 val ?? CamelDifficultyPregnancyRadio.no),
-                            groupValue: diffCtrl.charcter),
+                            groupValue: diffCtrl.charcter,
+                            noAnswerValue:CamelDifficultyPregnancyRadio.noAnswer ,
+                            onChangedNoAnswer: (val) => diffCtrl.onChange(
+                                val ?? CamelDifficultyPregnancyRadio.noAnswer),
+                            
+                            
+                            ),
                         if (diffCtrl.charcter ==
                             CamelDifficultyPregnancyRadio.yes)
                           Column(
@@ -161,8 +188,7 @@ class CamelReproductionWidget extends StatelessWidget {
                               CamelReproductionTextFieldWidget(
                                   title: "number of cases",
                                   onNoteChange: (val) {
-                                    sendDataCtrl.addAnswer(
-                                        id: 115, answer: val ?? "");
+                                    reproductionTextFieldCtrl.onChangeCaseNoDifficulty(val??"");
                                   })
                             ],
                           ),
@@ -190,7 +216,11 @@ class CamelReproductionWidget extends StatelessWidget {
                             noValue: CamelUnsatisfactoryAbortionRadio.no,
                             onChangedNo: (val) => abortionCtrl.onChange(
                                 val ?? CamelUnsatisfactoryAbortionRadio.no),
-                            groupValue: abortionCtrl.charcter),
+                            groupValue: abortionCtrl.charcter,
+                            noAnswerValue:CamelUnsatisfactoryAbortionRadio.noAnswer ,
+                            onChangedNoAnswer: (val) => abortionCtrl.onChange(
+                                val ?? CamelUnsatisfactoryAbortionRadio.noAnswer),
+                            ),
                         if (abortionCtrl.charcter ==
                             CamelUnsatisfactoryAbortionRadio.yes)
                           Column(
@@ -202,8 +232,7 @@ class CamelReproductionWidget extends StatelessWidget {
                               CamelReproductionTextFieldWidget(
                                   title: "number of cases",
                                   onNoteChange: (val) {
-                                    sendDataCtrl.addAnswer(
-                                        id: 118, answer: val ?? "");
+                                    reproductionTextFieldCtrl.onChangeCaseNoAboration(val??"");
                                   })
                             ],
                           ),
@@ -230,7 +259,13 @@ class CamelReproductionWidget extends StatelessWidget {
                             noValue: CamelobstructedLaborRadio.no,
                             onChangedNo: (val) => obstructedCtrl
                                 .onChange(val ?? CamelobstructedLaborRadio.no),
-                            groupValue: obstructedCtrl.charcter),
+                            groupValue: obstructedCtrl.charcter,
+                            noAnswerValue: CamelobstructedLaborRadio.noAnswer,
+                            onChangedNoAnswer: (val) => obstructedCtrl
+                                .onChange(val ?? CamelobstructedLaborRadio.noAnswer),
+                          
+                            
+                            ),
                         if (obstructedCtrl.charcter ==
                             CamelobstructedLaborRadio.yes)
                           Column(
@@ -241,7 +276,10 @@ class CamelReproductionWidget extends StatelessWidget {
                                       "what is number of cases of obstructed labor?"),
                               CamelReproductionTextFieldWidget(
                                   title: "number of cases",
-                                  onNoteChange: (val) {}),
+                                  onNoteChange: (val) {
+                                    reproductionTextFieldCtrl.onChangeCaseNoLabor(val??"");
+                              
+                                  }),
                               const LabelWidget(
                                   label:
                                       "In the case of difficult childbirth, who is giving birth?"),

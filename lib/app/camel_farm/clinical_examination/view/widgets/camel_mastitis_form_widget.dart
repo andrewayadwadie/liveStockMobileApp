@@ -1,18 +1,21 @@
-import 'package:animal_wealth/app/camel_farm/clinical_examination/view/widgets/camel_symptoms_types_textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../shared_widgets/label_widget.dart';
+import '../../controller/camel_clinical_textfield_controller.dart';
 import '../../controller/camel_inflammation_site_radio_controller.dart';
 import '../../controller/camel_sores_radio_controller.dart';
 import '../../controller/camel_udder_gangrene_radio_controller.dart';
 import '../../controller/camel_wounds_radio_controller.dart';
 import 'camel_clinical_examination_radio_widget.dart';
 import 'camel_inflammation_stie_radio_widget.dart';
+import 'camel_symptoms_types_textfield_widget.dart';
 
+// ignore: must_be_immutable
 class CamelMastitisFormWidget extends StatelessWidget {
-  const CamelMastitisFormWidget({Key? key}) : super(key: key);
-
+  CamelMastitisFormWidget({Key? key}) : super(key: key);
+CamelClinicalTextFieldController clinicalTextFieldCtrl =
+      Get.put(CamelClinicalTextFieldController());
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -20,13 +23,17 @@ class CamelMastitisFormWidget extends StatelessWidget {
         //!Number of Cases
         const LabelWidget(label: "Number of Cases ? "),
         CamelSymptomsTextFieldWidget(
-            title: "Number of Cases :", onNoteChange: (val) {}),
+            title: "Number of Cases :",
+            onNoteChange: (val) {
+              clinicalTextFieldCtrl.onChangemastitis(val??"");
+            }),
         //! The site of inflammation
         const LabelWidget(label: "The site of inflammation ? "),
         GetBuilder<CamelInflammationSiteRadioController>(
             init: CamelInflammationSiteRadioController(),
             builder: (inflammationSiteCtrl) {
               return CamelInflammationSiteRadioWidget(
+
                   enumName: CamelInflammationSiteRadio,
                   yesValue: CamelInflammationSiteRadio.udder,
                   onChangedYes: (val) => inflammationSiteCtrl
@@ -34,7 +41,11 @@ class CamelMastitisFormWidget extends StatelessWidget {
                   noValue: CamelInflammationSiteRadio.nipples,
                   onChangedNo: (val) => inflammationSiteCtrl
                       .onChange(val ?? CamelInflammationSiteRadio.nipples),
-                  groupValue: inflammationSiteCtrl.charcter);
+                  groupValue: inflammationSiteCtrl.charcter,
+                  noAnswerValue: CamelInflammationSiteRadio.noAnswer,
+                  onChangedNoAnswer: (val) => inflammationSiteCtrl
+                      .onChange(val ?? CamelInflammationSiteRadio.noAnswer) 
+                  );
             }),
 
         //!Is there gangrene in the udder?
@@ -53,14 +64,22 @@ class CamelMastitisFormWidget extends StatelessWidget {
                       noValue: CamelUdderGangrene.no,
                       onChangedNo: (val) => udderGangreneCtrl
                           .onChange(val ?? CamelUdderGangrene.no),
-                      groupValue: udderGangreneCtrl.charcter),
+                      groupValue: udderGangreneCtrl.charcter,
+                      
+                      noAnswerValue: CamelUdderGangrene.noAnswer,
+                      
+                      onChangedNoAnswer: (val) => udderGangreneCtrl
+                          .onChange(val ?? CamelUdderGangrene.noAnswer)),
                   if (udderGangreneCtrl.charcter == CamelUdderGangrene.yes)
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const LabelWidget(label: "Number of cases"),
                         CamelSymptomsTextFieldWidget(
-                            title: "numer of cases", onNoteChange: (val) {})
+                            title: "numer of cases",
+                            onNoteChange: (val) {
+                             clinicalTextFieldCtrl.onChangegargrne(val??"");
+                            })
                       ],
                     )
                 ],
@@ -80,7 +99,10 @@ class CamelMastitisFormWidget extends StatelessWidget {
                   noValue: CamelSoresRadioController.no,
                   onChangedNo: (val) =>
                       soresCtrl.onChange(val ?? CamelSoresRadioController.no),
-                  groupValue: soresCtrl.charcter);
+                  groupValue: soresCtrl.charcter,
+                  noAnswerValue: CamelSoresRadioController.noAnswer,
+                  onChangedNoAnswer: (val) => soresCtrl
+                      .onChange(val ?? CamelSoresRadioController.noAnswer));
             }),
 
         //!Are there wounds?
@@ -96,7 +118,13 @@ class CamelMastitisFormWidget extends StatelessWidget {
                   noValue: CamelWoundsRadioController.no,
                   onChangedNo: (val) =>
                       woundsCtrl.onChange(val ?? CamelWoundsRadioController.no),
-                  groupValue: woundsCtrl.charcter);
+                  groupValue: woundsCtrl.charcter,
+                  noAnswerValue: CamelWoundsRadioController.noAnswer,
+                  onChangedNoAnswer: (val) => woundsCtrl
+                      .onChange(val ?? CamelWoundsRadioController.noAnswer)
+                  
+                  
+                  );
             }),
       ],
     );

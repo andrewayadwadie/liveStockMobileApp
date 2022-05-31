@@ -9,6 +9,8 @@ class GeneralRadioWidget extends StatelessWidget {
     required this.noValue,
     required this.onChangedNo,
     required this.groupValue,
+    required this.noAnswerValue,
+    required this.onChangedNoAnswer,
   }) : super(key: key);
 
   final dynamic enumName;
@@ -17,7 +19,8 @@ class GeneralRadioWidget extends StatelessWidget {
   final dynamic noValue;
   final Function(dynamic) onChangedNo;
   final dynamic groupValue;
-
+  final dynamic noAnswerValue;
+  final Function(dynamic) onChangedNoAnswer;
   @override
   Widget build(BuildContext context) {
     return Row(children: [
@@ -35,6 +38,14 @@ class GeneralRadioWidget extends StatelessWidget {
         onChanged: onChangedNo,
       ),
       const Text('No'),
+
+ 
+      Radio(
+        value: noAnswerValue,
+        groupValue: groupValue,
+        onChanged: onChangedNoAnswer,
+      ),
+      const Text('No Answer'),
     ]);
   }
 }

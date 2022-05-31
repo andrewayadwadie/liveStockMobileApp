@@ -13,7 +13,7 @@ class CamelMiscarriageTimeController extends GetxController {
   RxInt miscarriageTimeId = 0.obs;
 
   void onTapSelected(BuildContext con, int id, index) {
-    miscarriageTimeId.value = id;
+    miscarriageTimeId.value = id+1;
     Navigator.pop(con);
 
     miscarriageTimeText.value = miscarriageTimeList[index];

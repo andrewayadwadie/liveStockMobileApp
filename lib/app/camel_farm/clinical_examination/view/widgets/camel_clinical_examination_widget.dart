@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../../shared_widgets/divider_line_widget.dart';
 import '../../../../shared_widgets/label_widget.dart';
 import '../../controller/animals_show_symptoms_radio_controller.dart';
+import '../../controller/camel_clinical_textfield_controller.dart';
 import '../../controller/camel_disease_among_workers_radio_widget.dart';
 import '../../controller/camel_disease_outbreak_radio_controller.dart';
 import '../../controller/camel_health_issues_checkbox_controller.dart';
@@ -14,9 +15,12 @@ import 'camel_sick_animals_treated_widget.dart';
 import 'camel_symptoms_checkbox_manual_widget.dart';
 import 'camel_symptoms_types_textfield_widget.dart';
 
+// ignore: must_be_immutable
 class CamelclinicalExaminationWidget extends StatelessWidget {
-  const CamelclinicalExaminationWidget({Key? key}) : super(key: key);
-
+  CamelclinicalExaminationWidget({Key? key}) : super(key: key);
+ 
+  CamelClinicalTextFieldController clinicalTextFieldCtrl =
+      Get.put(CamelClinicalTextFieldController());
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -74,13 +78,18 @@ class CamelclinicalExaminationWidget extends StatelessWidget {
                       noValue: CamelSickCaseRadio.no,
                       onChangedNo: (val) =>
                           sickCtrl.onChange(val ?? CamelSickCaseRadio.no),
-                      groupValue: sickCtrl.charcter),
+                      groupValue: sickCtrl.charcter,
+                      noAnswerValue: CamelSickCaseRadio.noAnswer,
+                      onChangedNoAnswer: (val) => sickCtrl
+                          .onChange(val ?? CamelSickCaseRadio.noAnswer)),
                 ],
               );
             }),
         const LineWidget(),
         const LabelWidget(label: "What are the symptoms?"),
-        const CamelSymptomsCheckboxManualWidget(),
+        //==================================================
+        CamelSymptomsCheckboxManualWidget(),
+        //==================================================
         const LineWidget(),
         const LabelWidget(
             label: "Did other animals show symptoms on the farm?"),
@@ -98,7 +107,10 @@ class CamelclinicalExaminationWidget extends StatelessWidget {
                       noValue: CamelAnimalsShowSymptomsRadio.no,
                       onChangedNo: (val) => showSymptomsCtrl
                           .onChange(val ?? CamelAnimalsShowSymptomsRadio.no),
-                      groupValue: showSymptomsCtrl.charcter),
+                      groupValue: showSymptomsCtrl.charcter,
+                      noAnswerValue: CamelAnimalsShowSymptomsRadio.noAnswer,
+                      onChangedNoAnswer: (val) => showSymptomsCtrl.onChange(
+                          val ?? CamelAnimalsShowSymptomsRadio.noAnswer)),
                   if (showSymptomsCtrl.charcter ==
                       CamelAnimalsShowSymptomsRadio.yes)
                     Column(
@@ -106,7 +118,10 @@ class CamelclinicalExaminationWidget extends StatelessWidget {
                       children: [
                         const LabelWidget(label: "Number of cases"),
                         CamelSymptomsTextFieldWidget(
-                            title: "numer of cases", onNoteChange: (val) {})
+                            title: "numer of cases",
+                            onNoteChange: (val) {
+                              clinicalTextFieldCtrl.onChangeanimalSymptoms(val??"");
+                            })
                       ],
                     )
                 ],
@@ -130,7 +145,10 @@ class CamelclinicalExaminationWidget extends StatelessWidget {
                       noValue: CamelDiseaseAmongWorkersRadio.no,
                       onChangedNo: (val) => diseaseAmongWorkers
                           .onChange(val ?? CamelDiseaseAmongWorkersRadio.no),
-                      groupValue: diseaseAmongWorkers.charcter),
+                      groupValue: diseaseAmongWorkers.charcter,
+                      noAnswerValue: CamelDiseaseAmongWorkersRadio.noAnswer,
+                      onChangedNoAnswer: (val) => diseaseAmongWorkers.onChange(
+                          val ?? CamelDiseaseAmongWorkersRadio.noAnswer)),
                   if (diseaseAmongWorkers.charcter ==
                       CamelDiseaseAmongWorkersRadio.yes)
                     Column(
@@ -138,10 +156,16 @@ class CamelclinicalExaminationWidget extends StatelessWidget {
                       children: [
                         const LabelWidget(label: "Number of cases"),
                         CamelSymptomsTextFieldWidget(
-                            title: "numer of cases", onNoteChange: (val) {}),
+                            title: "numer of cases",
+                            onNoteChange: (val) {
+                            clinicalTextFieldCtrl.onChangediseaseNo(val??"");
+                            }),
                         const LabelWidget(label: "symptoms"),
                         CamelSymptomsTextFieldWidget(
-                            title: "symptoms", onNoteChange: (val) {}),
+                            title: "symptoms",
+                            onNoteChange: (val) {
+                              clinicalTextFieldCtrl.onChangediseaseSymptoms(val??"");
+                            }),
                       ],
                     )
                 ],
@@ -168,7 +192,10 @@ class CamelclinicalExaminationWidget extends StatelessWidget {
                   noValue: CamelDiseaseOutbreakRadio.no,
                   onChangedNo: (val) => diseaseOutbreakCtrl
                       .onChange(val ?? CamelDiseaseOutbreakRadio.no),
-                  groupValue: diseaseOutbreakCtrl.charcter);
+                  groupValue: diseaseOutbreakCtrl.charcter,
+                  noAnswerValue: CamelDiseaseOutbreakRadio.noAnswer,
+                  onChangedNoAnswer: (val) => diseaseOutbreakCtrl
+                      .onChange(val ?? CamelDiseaseOutbreakRadio.noAnswer));
             }),
       ],
     );

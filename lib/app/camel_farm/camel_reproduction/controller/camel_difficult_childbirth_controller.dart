@@ -14,7 +14,7 @@ class CamelDifficultChildbirthController extends GetxController {
   RxInt difficultChildbirthId = 0.obs;
 
   void onTapSelected(BuildContext con, int id, index) {
-    difficultChildbirthId.value = id;
+    difficultChildbirthId.value = id+1;
     Navigator.pop(con);
 
     difficultChildbirthText.value = difficultChildbirthList[index];

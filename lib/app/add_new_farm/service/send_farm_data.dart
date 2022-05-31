@@ -7,6 +7,7 @@ import 'package:animal_wealth/utils/constants.dart';
 import 'package:animal_wealth/utils/db/auth_shared_preferences.dart';
 // ignore: implementation_imports
 import 'package:async/src/delegate/stream.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 
@@ -74,7 +75,8 @@ class SendFarmData {
         return 500;
       }
   }catch (e) {
-      throw "exception is : $e";
+       
+      Get.snackbar("error", "$e");
     }
   }
 }

@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 
-enum CamelFarmUmberella { yes, no }
+enum CamelFarmUmberella { yes, no ,noAnswer}
 
 class CamelFarmUmberellaController extends GetxController {
-  CamelFarmUmberella charcter = CamelFarmUmberella.yes;
+  CamelFarmUmberella charcter = CamelFarmUmberella.noAnswer;
 
   void onChange(CamelFarmUmberella value) {
     charcter = value;

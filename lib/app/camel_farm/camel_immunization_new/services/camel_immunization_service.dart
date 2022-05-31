@@ -1,8 +1,10 @@
 import 'dart:convert';
-import 'package:animal_wealth/app/camel_farm/camel_immunization_new/model/camel_immunizations_model.dart';
-import 'package:animal_wealth/utils/constants.dart';
-import 'package:animal_wealth/utils/db/auth_shared_preferences.dart';
+
 import 'package:http/http.dart' as http;
+
+import '../../../../utils/constants.dart';
+import '../../../../utils/db/auth_shared_preferences.dart';
+import '../model/camel_immunizations_model.dart';
 
 class CamelImmunizationService {
   static Future getImmunization(int id) async {

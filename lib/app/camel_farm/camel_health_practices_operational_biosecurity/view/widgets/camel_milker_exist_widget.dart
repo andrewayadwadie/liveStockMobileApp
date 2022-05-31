@@ -1,3 +1,8 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:animal_wealth/app/camel_farm/camel_health_practices_operational_biosecurity/controller/camel_if_udder_washed_controller.dart';
+import 'package:animal_wealth/app/camel_farm/camel_health_practices_operational_biosecurity/controller/camel_nipple_skin_used_radio_controller.dart';
+import 'package:animal_wealth/app/camel_farm/camel_health_practices_operational_biosecurity/controller/camel_opertional_textfield_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +21,7 @@ import '../../controller/camel_sanitizers_milker_tool_radio_controller.dart';
 import '../../controller/camel_sanitizers_used_radio_controller.dart';
 import '../../controller/camel_udder_washed_radio_controller.dart';
 import 'camel_blood_parasites_widget.dart';
+import 'camel_chemicals_farm_used_widget.dart';
 import 'camel_chemicals_used_widget.dart';
 import 'camel_dipper_radio_widget.dart';
 import 'camel_mastitis_milked_widget.dart';
@@ -24,10 +30,11 @@ import 'camel_operational_radio_widget.dart';
 import 'camel_operational_textfield_widget.dart';
 import 'camel_sanitizers_used_widget.dart';
 
-
 class CamelMilkerExistWidget extends StatelessWidget {
-  const CamelMilkerExistWidget({Key? key}) : super(key: key);
+  CamelMilkerExistWidget({Key? key}) : super(key: key);
 
+  CamelOPertionalTextFieldController opertionalTextFieldController =
+      Get.put(CamelOPertionalTextFieldController());
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -42,20 +49,29 @@ class CamelMilkerExistWidget extends StatelessWidget {
                 children: [
                   CamelOperationalRadioWidget(
                       enumName: CamelMilkerCleanedRadio,
-                      yesValue: CamelMilkerCleanedRadio.yes,
+                      yesValue:
+                          CamelMilkerCleanedRadio.yes, //? push in api id 175
                       onChangedYes: (val) => milkerCleanedCtrl
                           .onChange(val ?? CamelMilkerCleanedRadio.yes),
-                      noValue: CamelMilkerCleanedRadio.no,
+                      noValue:
+                          CamelMilkerCleanedRadio.no, //? push in api id 176
                       onChangedNo: (val) => milkerCleanedCtrl
                           .onChange(val ?? CamelMilkerCleanedRadio.no),
-                      groupValue: milkerCleanedCtrl.charcter),
+                      groupValue: milkerCleanedCtrl.charcter,
+                      noAnswerValue: CamelMilkerCleanedRadio.noAnswer,
+                      onChangedNoAnswer: (val) => milkerCleanedCtrl
+                          .onChange(val ?? CamelMilkerCleanedRadio.noAnswer)),
                   if (milkerCleanedCtrl.charcter == CamelMilkerCleanedRadio.yes)
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const LabelWidget(label: "how many times?"),
                         CamelOperationalTextFieldWidget(
-                            title: "how many times?", onNoteChange: (val) {})
+                            title: "how many times?",
+                            onNoteChange: (val) {
+                              opertionalTextFieldController
+                                  .onChangemilkerCleanNo(val ?? "");
+                            })
                       ],
                     )
                 ],
@@ -71,13 +87,19 @@ class CamelMilkerExistWidget extends StatelessWidget {
                 children: [
                   CamelOperationalRadioWidget(
                       enumName: CamelMilkerToolsCleanedRadio,
-                      yesValue: CamelMilkerToolsCleanedRadio.yes,
+                      yesValue: CamelMilkerToolsCleanedRadio
+                          .yes, //? push in api id 178
                       onChangedYes: (val) => milkerToolsCleanedCtrl
                           .onChange(val ?? CamelMilkerToolsCleanedRadio.yes),
-                      noValue: CamelMilkerToolsCleanedRadio.no,
+                      noValue: CamelMilkerToolsCleanedRadio
+                          .no, //? push in api id 179
                       onChangedNo: (val) => milkerToolsCleanedCtrl
                           .onChange(val ?? CamelMilkerToolsCleanedRadio.no),
-                      groupValue: milkerToolsCleanedCtrl.charcter),
+                      groupValue: milkerToolsCleanedCtrl.charcter,
+                      noAnswerValue: CamelMilkerToolsCleanedRadio.noAnswer,
+                      onChangedNoAnswer: (val) =>
+                          milkerToolsCleanedCtrl.onChange(
+                              val ?? CamelMilkerToolsCleanedRadio.noAnswer)),
                   if (milkerToolsCleanedCtrl.charcter ==
                       CamelMilkerToolsCleanedRadio.yes)
                     Column(
@@ -85,7 +107,11 @@ class CamelMilkerExistWidget extends StatelessWidget {
                       children: [
                         const LabelWidget(label: "how many times?"),
                         CamelOperationalTextFieldWidget(
-                            title: "how many times?", onNoteChange: (val) {})
+                            title: "how many times?",
+                            onNoteChange: (val) {
+                              opertionalTextFieldController
+                                  .onChangemilkerToolsCleanNo(val ?? "");
+                            })
                       ],
                     )
                 ],
@@ -101,16 +127,23 @@ class CamelMilkerExistWidget extends StatelessWidget {
                 children: [
                   CamelOperationalRadioWidget(
                       enumName: CamelSanitizersUsedRadio,
-                      yesValue: CamelSanitizersUsedRadio.yes,
+                      yesValue:
+                          CamelSanitizersUsedRadio.yes, //? push in api id 181
                       onChangedYes: (val) => sanitizersUsedCtrl
                           .onChange(val ?? CamelSanitizersUsedRadio.yes),
-                      noValue: CamelSanitizersUsedRadio.no,
+                      noValue:
+                          CamelSanitizersUsedRadio.no, //? push in api id 182
                       onChangedNo: (val) => sanitizersUsedCtrl
                           .onChange(val ?? CamelSanitizersUsedRadio.no),
-                      groupValue: sanitizersUsedCtrl.charcter),
+                      groupValue: sanitizersUsedCtrl.charcter,
+                      noAnswerValue: CamelSanitizersUsedRadio.noAnswer,
+                      onChangedNoAnswer: (val) => sanitizersUsedCtrl
+                          .onChange(val ?? CamelSanitizersUsedRadio.noAnswer)),
                   if (sanitizersUsedCtrl.charcter ==
                       CamelSanitizersUsedRadio.yes)
                     const CamelsanitizersUsedWidget()
+
+                  ///? push in api id 183
                 ],
               );
             }),
@@ -130,10 +163,14 @@ class CamelMilkerExistWidget extends StatelessWidget {
                       noValue: CamelSanitizersMilkerToolsRadio.no,
                       onChangedNo: (val) => sanitizersMilkerToolsCtrl
                           .onChange(val ?? CamelSanitizersMilkerToolsRadio.no),
-                      groupValue: sanitizersMilkerToolsCtrl.charcter),
+                      groupValue: sanitizersMilkerToolsCtrl.charcter,
+                      noAnswerValue: CamelSanitizersMilkerToolsRadio.noAnswer,
+                      onChangedNoAnswer: (val) =>
+                          sanitizersMilkerToolsCtrl.onChange(
+                              val ?? CamelSanitizersMilkerToolsRadio.noAnswer)),
                   if (sanitizersMilkerToolsCtrl.charcter ==
                       CamelSanitizersMilkerToolsRadio.yes)
-                    const CamelsanitizersMilkerToolsWidget()
+                    const CamelsanitizersMilkerToolsWidget() //? push in api id 186
                 ],
               );
             }),
@@ -146,45 +183,116 @@ class CamelMilkerExistWidget extends StatelessWidget {
             builder: (milkSampleCtrl) {
               return CamelOperationalRadioWidget(
                   enumName: CamelMIlkSampleRadio,
-                  yesValue: CamelMIlkSampleRadio.yes,
+                  yesValue: CamelMIlkSampleRadio.yes, //? push in api id 189
                   onChangedYes: (val) =>
                       milkSampleCtrl.onChange(val ?? CamelMIlkSampleRadio.yes),
-                  noValue: CamelMIlkSampleRadio.no,
+                  noValue: CamelMIlkSampleRadio.no, //? push in api id 190
                   onChangedNo: (val) =>
                       milkSampleCtrl.onChange(val ?? CamelMIlkSampleRadio.no),
-                  groupValue: milkSampleCtrl.charcter);
+                  groupValue: milkSampleCtrl.charcter,
+                  noAnswerValue: CamelMIlkSampleRadio.noAnswer,
+                  onChangedNoAnswer: (val) => milkSampleCtrl
+                      .onChange(val ?? CamelMIlkSampleRadio.noAnswer));
             }),
         const LineWidget(),
         //!-----------------------
         const LabelWidget(label: "Are nipple sinks used?"),
-        GetBuilder<CamelDipperRadioController>(
-            init: CamelDipperRadioController(),
-            builder: (milkSampleCtrl) {
-              return CamelDipperRadioWidget(
-                  enumName: CamelDipperRadio,
-                  yesValue: CamelDipperRadio.after,
-                  onChangedYes: (val) =>
-                      milkSampleCtrl.onChange(val ?? CamelDipperRadio.after),
-                  noValue: CamelDipperRadio.before,
-                  onChangedNo: (val) =>
-                      milkSampleCtrl.onChange(val ?? CamelDipperRadio.before),
-                  groupValue: milkSampleCtrl.charcter);
+
+        GetBuilder<CamelNipplesSkinUsedRadioController>(
+            init: CamelNipplesSkinUsedRadioController(),
+            builder: (nippleSkinCtrl) {
+              return Column(
+                children: [
+                  CamelOperationalRadioWidget(
+                      enumName: CamelNipplesSkinUsedRadio,
+                      yesValue: CamelNipplesSkinUsedRadio.yes,
+                      onChangedYes: (val) => nippleSkinCtrl
+                          .onChange(val ?? CamelNipplesSkinUsedRadio.yes),
+                      noValue: CamelNipplesSkinUsedRadio.no,
+                      onChangedNo: (val) => nippleSkinCtrl
+                          .onChange(val ?? CamelNipplesSkinUsedRadio.no),
+                      groupValue: nippleSkinCtrl.charcter,
+                      noAnswerValue: CamelNipplesSkinUsedRadio.noAnswer,
+                      onChangedNoAnswer: (val) => nippleSkinCtrl
+                          .onChange(val ?? CamelNipplesSkinUsedRadio.noAnswer)),
+                  if (nippleSkinCtrl.charcter == CamelNipplesSkinUsedRadio.yes)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const LabelWidget(label: "when use Nipple Skin?"),
+                        GetBuilder<CamelDipperRadioController>(
+                            init: CamelDipperRadioController(),
+                            builder: (milkSampleCtrl) {
+                              return CamelDipperRadioWidget(
+                                  enumName: CamelDipperRadio,
+                                  yesValue: CamelDipperRadio
+                                      .after, //? push in api id 191
+                                  onChangedYes: (val) => milkSampleCtrl
+                                      .onChange(val ?? CamelDipperRadio.after),
+                                  noValue: CamelDipperRadio
+                                      .before, //? push in api id 192
+                                  onChangedNo: (val) => milkSampleCtrl
+                                      .onChange(val ?? CamelDipperRadio.before),
+                                  groupValue: milkSampleCtrl.charcter,
+                                  noAnswerValue: CamelDipperRadio.noAnswer,
+                                  onChangedNoAnswer: (val) =>
+                                      milkSampleCtrl.onChange(
+                                          val ?? CamelDipperRadio.noAnswer));
+                            }),
+                      ],
+                    ),
+                ],
+              );
             }),
         const LineWidget(),
         //!-----------------------
         const LabelWidget(label: " Is the udder washed?"),
-        GetBuilder<CamelUdderWashedRadioController>(
-            init: CamelUdderWashedRadioController(),
-            builder: (milkSampleCtrl) {
-              return CamelDipperRadioWidget(
-                  enumName: CamelUdderWashedRadio,
-                  yesValue: CamelUdderWashedRadio.after,
-                  onChangedYes: (val) => milkSampleCtrl
-                      .onChange(val ?? CamelUdderWashedRadio.after),
-                  noValue: CamelUdderWashedRadio.before,
-                  onChangedNo: (val) => milkSampleCtrl
-                      .onChange(val ?? CamelUdderWashedRadio.before),
-                  groupValue: milkSampleCtrl.charcter);
+        GetBuilder<CamelIfUdderWashedController>(
+            init: CamelIfUdderWashedController(),
+            builder: (ifUdderWashed) {
+              return Column(
+                children: [
+                  CamelOperationalRadioWidget(
+                      enumName: CamelIfUdderWashed,
+                      yesValue: CamelIfUdderWashed.yes,
+                      onChangedYes: (val) =>
+                          ifUdderWashed.onChange(val ?? CamelIfUdderWashed.yes),
+                      noValue: CamelIfUdderWashed.no,
+                      onChangedNo: (val) =>
+                          ifUdderWashed.onChange(val ?? CamelIfUdderWashed.no),
+                      groupValue: ifUdderWashed.charcter,
+                      noAnswerValue: CamelIfUdderWashed.noAnswer,
+                      onChangedNoAnswer: (val) => ifUdderWashed
+                          .onChange(val ?? CamelIfUdderWashed.noAnswer)),
+                  if (ifUdderWashed.charcter == CamelIfUdderWashed.yes)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const LabelWidget(label: " when udder washed?"),
+                        GetBuilder<CamelUdderWashedRadioController>(
+                            init: CamelUdderWashedRadioController(),
+                            builder: (milkSampleCtrl) {
+                              return CamelDipperRadioWidget(
+                                  enumName: CamelUdderWashedRadio,
+                                  yesValue: CamelUdderWashedRadio
+                                      .after, //? push in api id 193
+                                  onChangedYes: (val) =>
+                                      milkSampleCtrl.onChange(
+                                          val ?? CamelUdderWashedRadio.after),
+                                  noValue: CamelUdderWashedRadio
+                                      .before, //? push in api id 194
+                                  onChangedNo: (val) => milkSampleCtrl.onChange(
+                                      val ?? CamelUdderWashedRadio.before),
+                                  groupValue: milkSampleCtrl.charcter,
+                                  noAnswerValue: CamelUdderWashedRadio.noAnswer,
+                                  onChangedNoAnswer: (val) =>
+                                      milkSampleCtrl.onChange(val ??
+                                          CamelUdderWashedRadio.noAnswer));
+                            }),
+                      ],
+                    )
+                ],
+              );
             }),
         const LineWidget(),
         //!-----------------------
@@ -201,13 +309,17 @@ class CamelMilkerExistWidget extends StatelessWidget {
                 children: [
                   CamelOperationalRadioWidget(
                       enumName: CamelInsectExistRadio,
-                      yesValue: CamelInsectExistRadio.yes,
+                      yesValue:
+                          CamelInsectExistRadio.yes, //? push in api id 198
                       onChangedYes: (val) => sanitizersMilkerToolsCtrl
                           .onChange(val ?? CamelInsectExistRadio.yes),
-                      noValue: CamelInsectExistRadio.no,
+                      noValue: CamelInsectExistRadio.no, //? push in api id 199
                       onChangedNo: (val) => sanitizersMilkerToolsCtrl
                           .onChange(val ?? CamelInsectExistRadio.no),
-                      groupValue: sanitizersMilkerToolsCtrl.charcter),
+                      groupValue: sanitizersMilkerToolsCtrl.charcter,
+                      noAnswerValue: CamelInsectExistRadio.noAnswer,
+                      onChangedNoAnswer: (val) => sanitizersMilkerToolsCtrl
+                          .onChange(val ?? CamelInsectExistRadio.noAnswer)),
                   if (sanitizersMilkerToolsCtrl.charcter ==
                       CamelInsectExistRadio.yes)
                     Column(
@@ -217,7 +329,10 @@ class CamelMilkerExistWidget extends StatelessWidget {
                             label: "How many animals are infected?"),
                         CamelOperationalTextFieldWidget(
                             title: "numbers of animals are infected",
-                            onNoteChange: (val) {}),
+                            onNoteChange: (val) {
+                              opertionalTextFieldController
+                                  .onChangeanimalInfected(val ?? "");
+                            }),
                         //! insect type
                         const LabelWidget(label: "insect type : "),
                         SizedBox(
@@ -235,13 +350,15 @@ class CamelMilkerExistWidget extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
-                                          const Text('tick'),
+                                          const Text(
+                                              'tick'), //? push in api id 201
                                           Checkbox(
                                             value: insect.tick,
                                             onChanged: (val) =>
                                                 insect.tickonChange(val),
                                           ),
-                                          const Text('flea'),
+                                          const Text(
+                                              'flea'), //? push in api id 202
                                           Checkbox(
                                             value: insect.flea,
                                             onChanged: (val) =>
@@ -257,13 +374,15 @@ class CamelMilkerExistWidget extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
-                                          const Text('mosquito'),
+                                          const Text(
+                                              'mosquito'), //? push in api id 203
                                           Checkbox(
                                             value: insect.mosquito,
                                             onChanged: (val) =>
                                                 insect.mosquitoonChange(val),
                                           ),
-                                          const Text('vermin'),
+                                          const Text(
+                                              'vermin'), //? push in api id 204
                                           Checkbox(
                                             value: insect.hamosh,
                                             onChanged: (val) =>
@@ -290,8 +409,8 @@ class CamelMilkerExistWidget extends StatelessWidget {
                                           CamelInsectAnimalPestControlRadio,
                                       yesValue:
                                           CamelInsectAnimalPestControlRadio.yes,
-                                      onChangedYes: (val) =>
-                                          animalPestCtrl.onChange(val ??
+                                      onChangedYes: (val) => animalPestCtrl
+                                          .onChange(val ??
                                               CamelInsectAnimalPestControlRadio
                                                   .yes),
                                       noValue:
@@ -300,7 +419,14 @@ class CamelMilkerExistWidget extends StatelessWidget {
                                           animalPestCtrl.onChange(val ??
                                               CamelInsectAnimalPestControlRadio
                                                   .no),
-                                      groupValue: animalPestCtrl.charcter),
+                                      groupValue: animalPestCtrl.charcter,
+                                      noAnswerValue:
+                                          CamelInsectAnimalPestControlRadio
+                                              .noAnswer,
+                                      onChangedNoAnswer: (val) =>
+                                          animalPestCtrl.onChange(val ??
+                                              CamelInsectAnimalPestControlRadio
+                                                  .noAnswer)),
                                   if (animalPestCtrl.charcter ==
                                       CamelInsectAnimalPestControlRadio.yes)
                                     const CamelChemicalsUsedWidget()
@@ -330,10 +456,17 @@ class CamelMilkerExistWidget extends StatelessWidget {
                                           farmPestCtrl.onChange(val ??
                                               CamelInsectFarmPestControlRadio
                                                   .no),
-                                      groupValue: farmPestCtrl.charcter),
+                                      groupValue: farmPestCtrl.charcter,
+                                      noAnswerValue:
+                                          CamelInsectFarmPestControlRadio
+                                              .noAnswer,
+                                      onChangedNoAnswer: (val) =>
+                                          farmPestCtrl.onChange(val ??
+                                              CamelInsectFarmPestControlRadio
+                                                  .noAnswer)),
                                   if (farmPestCtrl.charcter ==
                                       CamelInsectFarmPestControlRadio.yes)
-                                    const CamelChemicalsUsedWidget()
+                                    const CamelChemicalsFarmUsedWidget()
                                 ],
                               );
                             }),
@@ -357,7 +490,13 @@ class CamelMilkerExistWidget extends StatelessWidget {
                                       onChangedNo: (val) =>
                                           farmPestCtrl.onChange(val ??
                                               CamelbloodParasitesRadio.no),
-                                      groupValue: farmPestCtrl.charcter),
+                                      groupValue: farmPestCtrl.charcter,
+                                      noAnswerValue:
+                                          CamelbloodParasitesRadio.noAnswer,
+                                      onChangedNoAnswer: (val) =>
+                                          farmPestCtrl.onChange(val ??
+                                              CamelbloodParasitesRadio
+                                                  .noAnswer)),
                                   if (farmPestCtrl.charcter ==
                                       CamelbloodParasitesRadio.yes)
                                     const CamelbloodParasitesWidget()
@@ -372,136 +511,6 @@ class CamelMilkerExistWidget extends StatelessWidget {
         const LineWidget(),
 
         //!-----------------------
-/*
-        GetBuilder<CamelImmunizationExistController>(
-            init: CamelImmunizationExistController(),
-            builder: (radio) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Was Immunization done in the previous year?",
-                    style: TextStyle(
-                      color: primaryColor,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  ListTile(
-                    title: const Text('Yes'),
-                    leading: Radio<CamelImmunizationExist>(
-                      value: CamelImmunizationExist.yes, 
-                      groupValue: radio.charcter,
-                      onChanged: (val) =>
-                          radio.onChange(val ?? CamelImmunizationExist.yes),
-                    ),
-                  ),
-                  ListTile(
-                    title: const Text('No'),
-                    leading: Radio<CamelImmunizationExist>(
-                      value: CamelImmunizationExist.no,
-                      groupValue: radio.charcter,
-                      onChanged: (val) =>
-                          radio.onChange(val ?? CamelImmunizationExist.no),
-                    ),
-                  ),
-                  if (radio.charcter == CamelImmunizationExist.yes)
-                    GetBuilder<CamelImmunizationTypesController>(
-                        init: CamelImmunizationTypesController(),
-                        builder: (typeCtrl) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                "Camel Immunizations Types :",
-                                style: TextStyle(
-                                  color: primaryColor,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              ListTile(
-                                title: const Text('Brucellosis'),
-                                leading: Checkbox(
-                                  value: typeCtrl.brucellosis,
-                                  onChanged: (val) =>
-                                      typeCtrl.brucellosisonChange(val),
-                                ),
-                              ),
-                              if (typeCtrl.brucellosis)
-                                const CamelBrucellosisWidget(),
-                              ListTile(
-                                title: const Text('Corona Mers For Camels'),
-                                leading: Checkbox(
-                                  value: typeCtrl.coronaMersForCamels,
-                                  onChanged: (val) =>
-                                      typeCtrl.coronaMersForCamelsChange(val),
-                                ),
-                              ),
-                              if (typeCtrl.coronaMersForCamels)
-                                const CamelCoronaWidget(),
-                              ListTile(
-                                title: const Text('Smallpox For Camels'),
-                                leading: Checkbox(
-                                  value: typeCtrl.smallpoxForCamels,
-                                  onChanged: (val) =>
-                                      typeCtrl.smallpoxForCamelsonChange(val),
-                                ),
-                              ),
-                              if (typeCtrl.smallpoxForCamels)
-                                const CamelSmallBoxWidget(),
-                              ListTile(
-                                title: const Text('PPR'),
-                                leading: Checkbox(
-                                  value: typeCtrl.ppr,
-                                  onChanged: (val) => typeCtrl.ppronChange(val),
-                                ),
-                              ),
-                              if (typeCtrl.ppr) const CamelPPRWidget(),
-                              ListTile(
-                                title: const Text('foot and mouth disease '),
-                                leading: Checkbox(
-                                  value: typeCtrl.fmd,
-                                  onChanged: (val) => typeCtrl.fmdChange(val),
-                                ),
-                              ),
-                              if (typeCtrl.fmd) const CamelFootWidget(),
-                              ListTile(
-                                title: const Text('rift valley fever'),
-                                leading: Checkbox(
-                                  value: typeCtrl.rvf,
-                                  onChanged: (val) => typeCtrl.rvfChange(val),
-                                ),
-                              ),
-                              ListTile(
-                                title: const Text('IPR'),
-                                leading: Checkbox(
-                                  value: typeCtrl.ipr,
-                                  onChanged: (val) => typeCtrl.iprChange(val),
-                                ),
-                              ),
-                              if (typeCtrl.ipr) const CamelIPRWidget(),
-                              ListTile(
-                                title: const Text(
-                                    'Trypanosomiasis And Other Blood Parasites'),
-                                leading: Checkbox(
-                                  value: typeCtrl
-                                      .trypanosomiasisAndOtherBloodParasites,
-                                  onChanged: (val) => typeCtrl
-                                      .trypanosomiasisAndOtherBloodParasitesChange(
-                                          val),
-                                ),
-                              ),
-                              if (typeCtrl
-                                  .trypanosomiasisAndOtherBloodParasites)
-                                const CamelTrypanWidget(),
-                            ],
-                          );
-                        }),
-                ],
-              );
-            })
-      */
       ],
     );
   }

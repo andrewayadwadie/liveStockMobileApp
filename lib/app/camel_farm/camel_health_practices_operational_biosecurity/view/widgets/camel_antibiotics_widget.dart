@@ -7,6 +7,7 @@ import '../../../../shared_widgets/label_widget.dart';
 import '../../controller/camel_antibiotics_date_controller.dart';
 import '../../controller/camel_antibiotics_senstivity_radio_controller.dart';
 import '../../controller/camel_antibiotics_use_radio_controller.dart';
+import '../../controller/camel_opertional_textfield_controller.dart';
 import 'camel_antibiotics_description_widget.dart';
 import 'camel_antibiotics_having_widget.dart';
 import 'camel_antibiotics_type_widget.dart';
@@ -14,8 +15,12 @@ import 'camel_antibiotics_use_radio_widget.dart';
 import 'camel_operational_radio_widget.dart';
 import 'camel_operational_textfield_widget.dart';
 
+// ignore: must_be_immutable
 class CamelAntibioticsWidget extends StatelessWidget {
-  const CamelAntibioticsWidget({Key? key}) : super(key: key);
+  CamelAntibioticsWidget({Key? key}) : super(key: key);
+ 
+
+    CamelOPertionalTextFieldController opertionalTextFieldController = Get.put(CamelOPertionalTextFieldController());
 
   @override
   Widget build(BuildContext context) {
@@ -27,30 +32,37 @@ class CamelAntibioticsWidget extends StatelessWidget {
         GetBuilder<CamelAntibioticsUseRadioController>(
             init: CamelAntibioticsUseRadioController(),
             builder: (antiCtrl) {
-              return Column(
-                children: [
-                  CamelAntibioticsUseRadioWidget(
-                      enumName: CamelAntibioticsUseRadio,
-                      yesValue: CamelAntibioticsUseRadio.protection,
-                      onChangedYes: (val) => antiCtrl
-                          .onChange(val ?? CamelAntibioticsUseRadio.protection),
-                      noValue: CamelAntibioticsUseRadio.treatment,
-                      onChangedNo: (val) => antiCtrl
-                          .onChange(val ?? CamelAntibioticsUseRadio.treatment),
-                      groupValue: antiCtrl.charcter),
-                ],
-              );
+              return CamelAntibioticsUseRadioWidget(
+                  enumName: CamelAntibioticsUseRadio,
+                  yesValue: CamelAntibioticsUseRadio
+                      .protection, //? push in api id 216
+                  onChangedYes: (val) => antiCtrl
+                      .onChange(val ?? CamelAntibioticsUseRadio.protection),
+                  noValue:
+                      CamelAntibioticsUseRadio.treatment, //? push in api id 217
+                  onChangedNo: (val) => antiCtrl
+                      .onChange(val ?? CamelAntibioticsUseRadio.treatment),
+                  groupValue: antiCtrl.charcter,
+                  noAnswerValue: CamelAntibioticsUseRadio.noAnswer,
+                  onChangedNoAnswer: (val) =>
+                      antiCtrl.onChange(val ?? CamelAntibioticsUseRadio.noAnswer));
+                  
+                 
             }),
         const LineWidget(),
         const LabelWidget(label: "Types of antibiotics used?"),
-        const CamelAntibioticsTypeWidget(),
+        const CamelAntibioticsTypeWidget(), //! missed in api
         const LineWidget(),
         const LabelWidget(label: "How is each antibiotic given?"),
         CamelOperationalTextFieldWidget(
-            title: "How is each antibiotic given?", onNoteChange: (val) {}),
+            title: "How is each antibiotic given?",
+            onNoteChange: (val) {
+             opertionalTextFieldController.onChangeantibioticGiven(val??"");
+            }), //! missed in api
         const LineWidget(),
         const LabelWidget(
             label: "Are antibiotic sensitivity tests performed before use?"),
+        //! missed in api
         GetBuilder<CamelAntibioticsSenstivityRadioController>(
             init: CamelAntibioticsSenstivityRadioController(),
             builder: (milkerExistCtrl) {
@@ -62,14 +74,21 @@ class CamelAntibioticsWidget extends StatelessWidget {
                   noValue: CamelAntibioticsSenstivityRadio.no,
                   onChangedNo: (val) => milkerExistCtrl
                       .onChange(val ?? CamelAntibioticsSenstivityRadio.no),
-                  groupValue: milkerExistCtrl.charcter);
+                  groupValue: milkerExistCtrl.charcter,
+                  noAnswerValue:CamelAntibioticsSenstivityRadio.noAnswer ,
+                  onChangedNoAnswer: (val) => milkerExistCtrl
+                      .onChange(val ?? CamelAntibioticsSenstivityRadio.noAnswer));
+                   
             }),
         const LineWidget(),
         const LabelWidget(label: "Who prescribes the antibiotic?"),
+        //! missed in api
         const CamelAntibioticsDescriptionWidget(),
         const LineWidget(),
         const LabelWidget(label: "Who gives antibiotics to animals?"),
+        //! missed in api
         const CamelAntibioticsHavingWidget(),
+        //! missed in api
         GetBuilder<AntibioticsDateController>(
             init: AntibioticsDateController(),
             builder: (dateCtrl) {

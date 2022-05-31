@@ -4,12 +4,12 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:multi_image_picker2/multi_image_picker2.dart';
+//import 'package:multi_image_picker2/multi_image_picker2.dart';
 
 class ImagePickerController extends GetxController {
     File  image = File("");
    File  image2 = File("");
-  List<Asset> images = <Asset>[];
+  //List<Asset> images = <Asset>[];
   String errorr = 'No Error Dectected';
 
   Future pickImageFromCam() async {
@@ -68,7 +68,7 @@ class ImagePickerController extends GetxController {
     }
   }
 
-  Future<void> loadAssets() async {
+ /* Future<void> loadAssets() async {
     List<Asset> resultList = <Asset>[];
     String error = 'No Error Detected';
 
@@ -100,5 +100,5 @@ class ImagePickerController extends GetxController {
     images = resultList;
     errorr = error;
     update();
-  }
+  }*/
 }

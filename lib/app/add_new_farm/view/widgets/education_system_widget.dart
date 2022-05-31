@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../utils/controller/internet_connectivity_controller.dart';
+import '../../../../utils/db/auth_shared_preferences.dart';
 import '../../../../utils/style.dart';
 import '../../../shared_widgets/custom_loader.dart';
 import '../../controller/edu_sys_controller.dart';
@@ -14,7 +15,7 @@ class EduSysWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: GetBuilder<EduSysController>(
-          init: EduSysController(camelHerdId:2),
+          init: EduSysController(camelHerdId:FarmAnimalTypePref.getAnimalTypeValue()),
           builder: (controller) {
             return GetBuilder<InternetController>(
                 init: InternetController(),

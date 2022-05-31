@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 
-enum CamelMIlkSampleRadio { yes, no }
+enum CamelMIlkSampleRadio { yes, no ,noAnswer}
 
 class CamelMIlkSampleRadioController extends GetxController {
-  CamelMIlkSampleRadio charcter = CamelMIlkSampleRadio.yes;
+  CamelMIlkSampleRadio charcter = CamelMIlkSampleRadio.noAnswer;
 
   void onChange(CamelMIlkSampleRadio value) {
     charcter = value;

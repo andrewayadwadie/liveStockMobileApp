@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 
-enum CamelMilkerBuildingTypeRadio { fullyClosed, halfWallWithCanopy }
+enum CamelMilkerBuildingTypeRadio { fullyClosed, halfWallWithCanopy,noAnswer }
 
 class CamelMilkerBuildingTypeRadioController extends GetxController {
   CamelMilkerBuildingTypeRadio charcter =
-      CamelMilkerBuildingTypeRadio.fullyClosed;
+      CamelMilkerBuildingTypeRadio.noAnswer;
 
   void onChange(CamelMilkerBuildingTypeRadio value) {
     charcter = value;

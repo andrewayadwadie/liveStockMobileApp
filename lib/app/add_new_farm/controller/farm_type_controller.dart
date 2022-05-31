@@ -9,7 +9,7 @@ class FarmTypeController extends GetxController {
   int farmsId = 0;
 
   void onTapSelected(BuildContext con, int id, int index) {
-    farmsId = id;
+    farmsId = id+1;
     Navigator.pop(con);
 
     farmsText = farms[index];

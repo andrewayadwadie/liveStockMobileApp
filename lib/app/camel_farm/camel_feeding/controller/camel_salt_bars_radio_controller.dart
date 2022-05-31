@@ -2,10 +2,10 @@
 
 import 'package:get/get.dart';
 
-enum CamelSaltBarsRadio { yes , no }
+enum CamelSaltBarsRadio { yes , no ,noAnswer}
 
 class CamelSaltBarsRadioController extends GetxController {
-  CamelSaltBarsRadio charcter = CamelSaltBarsRadio.yes;
+  CamelSaltBarsRadio charcter = CamelSaltBarsRadio.noAnswer;
 
   void onChange(CamelSaltBarsRadio value) {
     charcter = value;

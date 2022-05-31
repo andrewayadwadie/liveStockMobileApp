@@ -15,7 +15,7 @@ class CamelHousingFloorTypeController extends GetxController {
   RxInt floorTypeId = 0.obs;
 
   void onTapSelected(BuildContext con, int id, index) { 
-    floorTypeId.value = id;
+    floorTypeId.value = id+1;
     Navigator.pop(con);
 
     floorTypeText.value = floorTypeList[index];

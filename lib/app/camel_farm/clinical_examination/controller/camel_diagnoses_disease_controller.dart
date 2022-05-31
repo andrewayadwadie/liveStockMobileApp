@@ -14,7 +14,7 @@ class CamelDiagnosesDiseaseController extends GetxController {
   RxInt diagnosesDiseaseId = 0.obs;
 
   void onTapSelected(BuildContext con, int id, index) {
-    diagnosesDiseaseId.value = id;
+    diagnosesDiseaseId.value = id+1;
     Navigator.pop(con);
 
     diagnosesDiseaseText.value = diagnosesDiseaseList[index];

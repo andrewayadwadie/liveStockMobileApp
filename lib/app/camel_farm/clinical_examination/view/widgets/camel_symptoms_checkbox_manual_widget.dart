@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../../utils/style.dart';
 import '../../../../shared_widgets/label_widget.dart';
+import '../../controller/camel_clinical_examination_send_data_controller.dart';
+import '../../controller/camel_clinical_textfield_controller.dart';
 import '../../controller/camel_symptoms_checkbox_manual_controller.dart';
 import 'camel_mastitis_form_widget.dart';
 import 'camel_miscarriage_form_widget.dart';
 import 'camel_symptoms_types_textfield_widget.dart';
 
+// ignore: must_be_immutable
 class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
-  const CamelSymptomsCheckboxManualWidget({Key? key}) : super(key: key);
-
+  CamelSymptomsCheckboxManualWidget({Key? key}) : super(key: key);
+  CamelClinicalTextFieldController clinicalTextFieldCtrl =
+      Get.put(CamelClinicalTextFieldController());
+  CamelclinicalExaminationSendDataController sendPopUpDataCtrl =
+      Get.put(CamelclinicalExaminationSendDataController());
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CamelSymptomsCheckboxManualController>(
@@ -31,7 +38,10 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                   children: [
                     const LabelWidget(label: "How many cases?"),
                     CamelSymptomsTextFieldWidget(
-                        title: "cases", onNoteChange: (val) {})
+                        title: "cases",
+                        onNoteChange: (val) {
+                          clinicalTextFieldCtrl.onChangefever(val ?? "");
+                        })
                   ],
                 ),
               ListTile(
@@ -47,7 +57,10 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                   children: [
                     const LabelWidget(label: "How many cases?"),
                     CamelSymptomsTextFieldWidget(
-                        title: "cases", onNoteChange: (val) {})
+                        title: "cases",
+                        onNoteChange: (val) {
+                          clinicalTextFieldCtrl.onChangelimp(val ?? "");
+                        })
                   ],
                 ),
               ListTile(
@@ -63,7 +76,10 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                   children: [
                     const LabelWidget(label: "How many cases?"),
                     CamelSymptomsTextFieldWidget(
-                        title: "cases", onNoteChange: (val) {})
+                        title: "cases",
+                        onNoteChange: (val) {
+                          clinicalTextFieldCtrl.onChangecough(val ?? "");
+                        })
                   ],
                 ),
               ListTile(
@@ -80,7 +96,10 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                   children: [
                     const LabelWidget(label: "How many cases?"),
                     CamelSymptomsTextFieldWidget(
-                        title: "cases", onNoteChange: (val) {})
+                        title: "cases",
+                        onNoteChange: (val) {
+                          clinicalTextFieldCtrl.onChangebreathing(val ?? "");
+                        })
                   ],
                 ),
               ListTile(
@@ -96,7 +115,10 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                   children: [
                     const LabelWidget(label: "How many cases?"),
                     CamelSymptomsTextFieldWidget(
-                        title: "cases", onNoteChange: (val) {})
+                        title: "cases",
+                        onNoteChange: (val) {
+                          clinicalTextFieldCtrl.onChangediarrhea(val ?? "");
+                        })
                   ],
                 ),
               ListTile(
@@ -112,7 +134,10 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                   children: [
                     const LabelWidget(label: "How many cases?"),
                     CamelSymptomsTextFieldWidget(
-                        title: "cases", onNoteChange: (val) {})
+                        title: "cases",
+                        onNoteChange: (val) {
+                          clinicalTextFieldCtrl.onChangefnasal(val ?? "");
+                        })
                   ],
                 ),
               ListTile(
@@ -129,7 +154,10 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                   children: [
                     const LabelWidget(label: "How many cases?"),
                     CamelSymptomsTextFieldWidget(
-                        title: "cases", onNoteChange: (val) {})
+                        title: "cases",
+                        onNoteChange: (val) {
+                          clinicalTextFieldCtrl.onChangevaginal(val ?? "");
+                        })
                   ],
                 ),
               ListTile(
@@ -146,7 +174,10 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                   children: [
                     const LabelWidget(label: "How many cases?"),
                     CamelSymptomsTextFieldWidget(
-                        title: "cases", onNoteChange: (val) {})
+                        title: "cases",
+                        onNoteChange: (val) {
+                          clinicalTextFieldCtrl.onChangesecretions(val ?? "");
+                        })
                   ],
                 ),
               ListTile(
@@ -162,7 +193,10 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                   children: [
                     const LabelWidget(label: "How many cases?"),
                     CamelSymptomsTextFieldWidget(
-                        title: "cases", onNoteChange: (val) {})
+                        title: "cases",
+                        onNoteChange: (val) {
+                          clinicalTextFieldCtrl.onChangedrooling(val ?? "");
+                        })
                   ],
                 ),
               ListTile(
@@ -179,7 +213,10 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                   children: [
                     const LabelWidget(label: "How many cases?"),
                     CamelSymptomsTextFieldWidget(
-                        title: "cases", onNoteChange: (val) {})
+                        title: "cases",
+                        onNoteChange: (val) {
+                          clinicalTextFieldCtrl.onChangeinflammation(val ?? "");
+                        })
                   ],
                 ),
               ListTile(
@@ -195,7 +232,10 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                   children: [
                     const LabelWidget(label: "How many cases?"),
                     CamelSymptomsTextFieldWidget(
-                        title: "cases", onNoteChange: (val) {})
+                        title: "cases",
+                        onNoteChange: (val) {
+                          clinicalTextFieldCtrl.onChangeanorexia(val ?? "");
+                        })
                   ],
                 ),
               ListTile(
@@ -211,7 +251,10 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                   children: [
                     const LabelWidget(label: "How many cases?"),
                     CamelSymptomsTextFieldWidget(
-                        title: "cases", onNoteChange: (val) {})
+                        title: "cases",
+                        onNoteChange: (val) {
+                          clinicalTextFieldCtrl.onChangenervous(val ?? "");
+                        })
                   ],
                 ),
               ListTile(
@@ -227,7 +270,10 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                   children: [
                     const LabelWidget(label: "How many cases?"),
                     CamelSymptomsTextFieldWidget(
-                        title: "cases", onNoteChange: (val) {})
+                        title: "cases",
+                        onNoteChange: (val) {
+                          clinicalTextFieldCtrl.onChangeskinlesions(val ?? "");
+                        })
                   ],
                 ),
               ListTile(
@@ -243,7 +289,10 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                   children: [
                     const LabelWidget(label: "How many cases?"),
                     CamelSymptomsTextFieldWidget(
-                        title: "cases", onNoteChange: (val) {})
+                        title: "cases",
+                        onNoteChange: (val) {
+                          clinicalTextFieldCtrl.onChangewightLoss(val ?? "");
+                        })
                   ],
                 ),
               ListTile(
@@ -260,7 +309,11 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                   children: [
                     const LabelWidget(label: "How many cases?"),
                     CamelSymptomsTextFieldWidget(
-                        title: "cases", onNoteChange: (val) {})
+                        title: "cases",
+                        onNoteChange: (val) {
+                          clinicalTextFieldCtrl
+                              .onChangedecreasedMilk(val ?? "");
+                        })
                   ],
                 ),
               ListTile(
@@ -276,9 +329,14 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                   children: [
                     const LabelWidget(label: "How many cases?"),
                     CamelSymptomsTextFieldWidget(
-                        title: "cases", onNoteChange: (val) {})
+                        title: "cases",
+                        onNoteChange: (val) {
+                          clinicalTextFieldCtrl.onChangelethargy(val ?? "");
+                        })
                   ],
                 ),
+
+//!===============*============================*==========================================
               ListTile(
                 title: const Text('mastitis'),
                 leading: Checkbox(
@@ -303,7 +361,7 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 1.97,
-                                        child: const CamelMastitisFormWidget(),
+                                        child: CamelMastitisFormWidget(),
                                       ),
                                     ),
                                     Align(
@@ -315,7 +373,11 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                                             color: whiteColor,
                                           ),
                                         ),
-                                        onPressed: () => Navigator.pop(context),
+                                        onPressed: () {
+                                          sendPopUpDataCtrl
+                                              .fillMastitisAnswers();
+                                          Navigator.pop(context);
+                                        },
                                       ),
                                     )
                                   ],
@@ -327,6 +389,7 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                   },
                 ),
               ),
+//!===============*============================*==========================================
               ListTile(
                 title: const Text('miscarriage'),
                 leading: Checkbox(
@@ -351,22 +414,24 @@ class CamelSymptomsCheckboxManualWidget extends StatelessWidget {
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 1.97,
-                                        child:
-                                            const CamelMiscarriageFormWidget(),
+                                        child: CamelMiscarriageFormWidget(),
                                       ),
                                     ),
                                     Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: ElevatedButton(
-                                        child: const Text(
-                                          'data confirmation',
-                                          style: TextStyle(
-                                            color: whiteColor,
+                                        alignment: Alignment.bottomCenter,
+                                        child: ElevatedButton(
+                                          child: const Text(
+                                            'data confirmation',
+                                            style: TextStyle(
+                                              color: whiteColor,
+                                            ),
                                           ),
-                                        ),
-                                        onPressed: () => Navigator.pop(context),
-                                      ),
-                                    )
+                                          onPressed: () {
+                                            sendPopUpDataCtrl
+                                                .fillMiscarriageAnswers();
+                                            Navigator.pop(context);
+                                          },
+                                        ))
                                   ],
                                 ),
                               ),

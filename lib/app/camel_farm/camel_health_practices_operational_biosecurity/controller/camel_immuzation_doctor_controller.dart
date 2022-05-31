@@ -14,7 +14,7 @@ class CamelImmuzatioDoctorController extends GetxController {
   RxInt immuzatioDoctorId = 0.obs;
 
   void onTapSelected(BuildContext con, int id, index) {
-    immuzatioDoctorId.value = id;
+    immuzatioDoctorId.value = id+1;
     Navigator.pop(con);
 
     immuzatioDoctorText.value = immuzatioDoctorList[index];

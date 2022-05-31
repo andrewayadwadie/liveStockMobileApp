@@ -6,10 +6,14 @@ class CamelSampleWidget extends StatelessWidget {
   const CamelSampleWidget({
     Key? key,
     required this.onChange,
+ 
     required this.controller,
+
   }) : super(key: key);
   final Function(String?)? onChange;
+
   final TextEditingController controller;
+ 
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -44,7 +48,7 @@ class CamelSampleWidget extends StatelessWidget {
 
           //============================================
           // =========hint ===================================
-
+          hintText: 'Enter sample number',
           hintStyle: const TextStyle(fontSize: 10),
 
           //enabledBorder: InputBorder.none
@@ -52,7 +56,7 @@ class CamelSampleWidget extends StatelessWidget {
         // The validator receives the text that the user has entered.
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return 'Please enter a sample';
+            return 'Please enter a sample number';
           }
           return null;
         },

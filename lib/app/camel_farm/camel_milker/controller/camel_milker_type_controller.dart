@@ -13,7 +13,7 @@ class CamelMilkerTypeController extends GetxController {
   RxInt milkerTypeId = 0.obs;
 
   void onTapSelected(BuildContext con, int id, index) {
-    milkerTypeId.value = id;
+    milkerTypeId.value = id+1;
     Navigator.pop(con);
 
     milkerTypeText.value = milkerTypeList[index];

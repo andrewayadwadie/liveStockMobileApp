@@ -15,7 +15,7 @@ class CamelReproductionWayController extends GetxController {
   RxInt reproductionWayId = 0.obs;
 
   void onTapSelected(BuildContext con, int id, index) { 
-    reproductionWayId.value = id;
+    reproductionWayId.value = id+1;
     Navigator.pop(con);
 
     reproductionWayText.value = reproductionWayList[index];

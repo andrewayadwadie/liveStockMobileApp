@@ -1,18 +1,20 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../shared_widgets/label_widget.dart';
 import '../../controller/camel_clinical_changes_checkbox_controller.dart';
 import '../../controller/camel_clinical_changes_radio_controller.dart';
+import '../../controller/camel_clinical_textfield_controller.dart';
 import '../../controller/camel_symptoms_before_abortion_radio_controller.dart';
 import 'camel_clinical_examination_radio_widget.dart';
 import 'camel_misccariage_time_widget.dart';
 import 'camel_symptoms_types_textfield_widget.dart';
 
+// ignore: must_be_immutable
 class CamelMiscarriageFormWidget extends StatelessWidget {
-  const CamelMiscarriageFormWidget({Key? key}) : super(key: key);
-
+  CamelMiscarriageFormWidget({Key? key}) : super(key: key);
+  CamelClinicalTextFieldController clinicalTextFieldCtrl =
+      Get.put(CamelClinicalTextFieldController());
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -20,7 +22,10 @@ class CamelMiscarriageFormWidget extends StatelessWidget {
         //!Number of Cases
         const LabelWidget(label: "Number of Cases ? "),
         CamelSymptomsTextFieldWidget(
-            title: "Number of Cases :", onNoteChange: (val) {}),
+            title: "Number of Cases :",
+            onNoteChange: (val) {
+            clinicalTextFieldCtrl.onChangemiscarriage(val??"");
+            }),
         //!Are there symptoms before the abortion?
         const LabelWidget(label: "Are there symptoms before the abortion? "),
 
@@ -37,9 +42,13 @@ class CamelMiscarriageFormWidget extends StatelessWidget {
                           symmptomsBeforeAbortionCtrl.onChange(
                               val ?? CamelSymptomsBeforeAbortionRadio.yes),
                       noValue: CamelSymptomsBeforeAbortionRadio.no,
-                      onChangedNo: (val) => symmptomsBeforeAbortionCtrl
-                          .onChange(val ?? CamelSymptomsBeforeAbortionRadio.no),
-                      groupValue: symmptomsBeforeAbortionCtrl.charcter),
+                      onChangedNo: (val) => symmptomsBeforeAbortionCtrl.onChange(val ?? CamelSymptomsBeforeAbortionRadio.no),
+                      groupValue: symmptomsBeforeAbortionCtrl.charcter,
+                      noAnswerValue: CamelSymptomsBeforeAbortionRadio.noAnswer,
+                      onChangedNoAnswer: (val) => symmptomsBeforeAbortionCtrl.onChange(val ??CamelSymptomsBeforeAbortionRadio.noAnswer)
+
+                      
+                      ),
                   if (symmptomsBeforeAbortionCtrl.charcter ==
                       CamelSymptomsBeforeAbortionRadio.yes)
                     Column(
@@ -47,7 +56,11 @@ class CamelMiscarriageFormWidget extends StatelessWidget {
                       children: [
                         const LabelWidget(label: "Detect Symptoms . "),
                         CamelSymptomsTextFieldWidget(
-                            title: "Symptoms :", onNoteChange: (val) {})
+                            title: "Symptoms :",
+                            onNoteChange: (val) {
+                            clinicalTextFieldCtrl.onChangesymptomsAbortion(val??"");
+                          
+                            })
                       ],
                     )
                 ],
@@ -73,7 +86,13 @@ class CamelMiscarriageFormWidget extends StatelessWidget {
                       noValue: CamelClinicalChangesRadio.no,
                       onChangedNo: (val) => clinicalChangesRadioCtrl
                           .onChange(val ?? CamelClinicalChangesRadio.no),
-                      groupValue: clinicalChangesRadioCtrl.charcter),
+                      groupValue: clinicalChangesRadioCtrl.charcter,
+                      noAnswerValue: CamelClinicalChangesRadio.noAnswer,
+                      onChangedNoAnswer: (val) => clinicalChangesRadioCtrl
+                          .onChange(val ??
+                              CamelClinicalChangesRadio.noAnswer)
+ 
+                      ),
                   if (clinicalChangesRadioCtrl.charcter ==
                       CamelClinicalChangesRadio.yes)
                     GetBuilder<CamelClinicalChangesCheckboxController>(

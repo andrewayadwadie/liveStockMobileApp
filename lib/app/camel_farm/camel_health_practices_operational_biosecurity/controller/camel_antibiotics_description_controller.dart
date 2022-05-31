@@ -15,7 +15,7 @@ class CamelAntibioticsDescriptionController extends GetxController {
   RxInt antibioticsDescriptionId = 0.obs;
 
   void onTapSelected(BuildContext con, int id, index) {
-    antibioticsDescriptionId.value = id;
+    antibioticsDescriptionId.value = id+1;
     Navigator.pop(con);
 
     antibioticsDescriptionText.value = antibioticsDescriptionList[index];

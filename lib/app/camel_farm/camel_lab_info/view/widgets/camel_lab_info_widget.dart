@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../utils/style.dart';
@@ -21,6 +21,9 @@ class CamelLabInfoWidget extends StatelessWidget {
               child: Container(
                 alignment: Alignment.center,
                 height: MediaQuery.of(context).size.height / 15,
+                // width: MediaQuery.of(context).size.width/5,
+                margin: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width / 6),
                 decoration: BoxDecoration(
                   color: secondaryColor,
                   borderRadius: BorderRadius.circular(8),
@@ -40,7 +43,10 @@ class CamelLabInfoWidget extends StatelessWidget {
                   itemCount: lab.samples.length,
                   itemBuilder: (context, index) {
                     return CamelListSampleWidget(
-                        index: index, samplController: lab.textEditList[index]);
+                      index: index,
+                      samplController: lab.sampleNumbertextEditList[index],
+                      placeSamplController: lab.placetextEditList[index],
+                    );
                   }),
             )
           ]);

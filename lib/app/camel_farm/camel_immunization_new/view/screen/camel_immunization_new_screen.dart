@@ -1,70 +1,159 @@
-import 'package:animal_wealth/app/camel_farm/camel_immunization_new/view/widgets/camel_immunization_new_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:get/get.dart';
 
+import '../../../../../utils/db/auth_shared_preferences.dart';
 import '../../../../../utils/style.dart';
+import '../../../../auth/login_screen.dart';
 import '../../../../home/home_screen.dart';
 import '../../../../shared_widgets/custom_appbar_title.dart';
- 
-class CamelImmunizationNewScreen extends StatelessWidget {
-  const CamelImmunizationNewScreen({ Key? key }) : super(key: key);
+import '../../../clinical_examination/view/screen/camel_clinical_examination_screen.dart';
+import '../../controller/camel_immunization_way_text_controller.dart';
+import '../../controller/camel_send_new_immunization_data_controller.dart';
+import '../../services/camel_send_new_immunization_data_service.dart';
+import '../widgets/camel_immunization_new_widget.dart';
 
+// ignore: must_be_immutable
+class CamelImmunizationNewScreen extends StatelessWidget {
+  CamelImmunizationNewScreen({Key? key}) : super(key: key);
+  CamelImmunizationWayTextController wayCtrl =
+      Get.put(CamelImmunizationWayTextController());
+  final _formKey = GlobalKey<FormState>();
+  CamelSendNewImmunizationDataController sendNewImmunizationDataController =
+      Get.put(CamelSendNewImmunizationDataController(), permanent: true);
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-       onWillPop: () async {
-         
-      return true;
+      onWillPop: () async {
+        return true;
       },
-      child: Scaffold(
-        backgroundColor: offwhiteColor,
-        appBar:AppBar(
-            backgroundColor: whiteColor,
-            leading: IconButton(
-              onPressed: () => Get.offAll(HomeScreen()),
-              icon: const Icon(Icons.home),
-              color: primaryColor,
-            ),
-            title: const AppBarTitle()
-          ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height /  1.173,
-              width: MediaQuery.of(context).size.width,
-              child: Stack(
-                children: [
-                  Positioned(
-                    top: MediaQuery.of(context).size.height / 30,
-                    left: MediaQuery.of(context).size.width / 10,
-                    child: const Text(
-                      "Immunization of Camel farm",
-                      style: TextStyle(
-                        color: primaryColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  //!Immunization Form Body
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width / 1.1,
-                      height: MediaQuery.of(context).size.height / 1.35,
-                      padding: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                          color: whiteColor,
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20))),
-                      child: const CamelImmunizationNewFormWidget(),
-    
-                      //FarmOwnerFormWidget(farmOwnerKet: _formKey),
-                    ),
-                  ),
-                ],
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: offwhiteColor,
+          appBar: AppBar(
+              backgroundColor: whiteColor,
+              leading: IconButton(
+                onPressed: () => Get.offAll(HomeScreen()),
+                icon: const Icon(Icons.home),
+                color: primaryColor,
               ),
+              title: const AppBarTitle()),
+          body: Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height / 25,
+                ),
+                const Center(
+                  child: Text(
+                    "Immunization of Camel farm",
+                    style: TextStyle(
+                      color: primaryColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height / 25,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width / 1.1,
+                  height: MediaQuery.of(context).size.height / 1.3,
+                  decoration: const BoxDecoration(
+                      color: whiteColor,
+                      borderRadius:
+                          BorderRadius.only(topRight: Radius.circular(20))),
+                  child: Form(
+                    key: _formKey,
+                    child: Stack(
+                      children: [
+                        //!formContent
+                        Positioned(
+                          top: MediaQuery.of(context).size.height / 50,
+                          child: SizedBox(
+                              width: MediaQuery.of(context).size.width / 1.17,
+                              height: MediaQuery.of(context).size.height / 1.5,
+                              child: CamelImmunizationNewFormWidget()),
+                        ),
+                        //!Submit (Next Buttom)
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: InkWell(
+                            onTap: () async {
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState!.save();
+                                // log("Answers :${sendNewImmunizationDataController.answers}");
+                                // log("Answers length: ${sendNewImmunizationDataController.answers.length}");
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => FutureProgressDialog(
+                                        SendCamelSendNewImmunizationService
+                                            .sendCamelSendNewImmunizationService(
+                                                data:
+                                                    sendNewImmunizationDataController
+                                                        .answers)));
+                                var res =
+                                    await SendCamelSendNewImmunizationService
+                                        .sendCamelSendNewImmunizationService(
+                                            data:
+                                                sendNewImmunizationDataController
+                                                    .answers);
+                                if (res == 200) {
+                                  await FarmCamelStatusPref.setCamelStatusValue(
+                                      8);
+                                  Get.offAll(
+                                      () => CamelclinicalExaminationScreen());
+                                } else if (res == 401) {
+                                  sendNewImmunizationDataController.answers
+                                      .clear();
+                                  Get.offAll(() => const LoginScreen());
+                                } else if (res == 500 || res == 400) {
+                                  sendNewImmunizationDataController.answers
+                                      .clear();
+                                  Get.snackbar(
+                                    'Error',
+                                    'Server Error $res',
+                                    backgroundColor: Colors.red,
+                                    colorText: Colors.white,
+                                    icon: const Icon(
+                                      Icons.error,
+                                      color: Colors.white,
+                                    ),
+                                  );
+                                } else if (res.runtimeType == String) {
+                                  sendNewImmunizationDataController.answers
+                                      .clear();
+                                  Get.snackbar(
+                                    'Error',
+                                    ' $res',
+                                    backgroundColor: Colors.red,
+                                    colorText: Colors.white,
+                                    icon: const Icon(
+                                      Icons.error,
+                                      color: Colors.white,
+                                    ),
+                                  );
+                                }
+                              }
+                            },
+                            child: SizedBox(
+                              child: SvgPicture.asset(
+                                "assets/icons/next_button.svg",
+                                width: MediaQuery.of(context).size.width / 10,
+                                height: MediaQuery.of(context).size.height / 10,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
         ),

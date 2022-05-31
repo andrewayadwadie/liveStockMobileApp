@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../utils/db/auth_shared_preferences.dart';
 import '../../../utils/style.dart';
 import '../controller/home_body_controller.dart';
 import 'add_new_farm_widget.dart';
@@ -89,16 +90,38 @@ class HomeBodyWidget extends StatelessWidget {
                         return AddNewFarmWidget(
                           title: "Add New",
                           icon: Icons.add_circle_outline,
-                          onClick: (){ 
-                            log("message");
-                            ctrl.routeCheck(); } ,
+                          onClick: () {
+                            ctrl.routeCheck();
+                            log("""
+                            TokenPref ${TokenPref.getTokenValue()}},
+                            FarmOwnerPref ${FarmOwnerPref.getOwnerValue()}},
+                            FarmOwnerNamePref ${FarmOwnerNamePref.getOwnerNameValue()}},
+                            FarmPref ${FarmPref.getValue()}},
+                            FarmAnimalTypePref ${FarmAnimalTypePref.getAnimalTypeValue()}},
+                            FarmCamelHerdPref ${FarmCamelHerdPref.getCamelHerdValue()}},
+                            FarmCowHerdPref ${FarmCowHerdPref.getCowHerdValue()}},
+                            FarmCamelStatusPref ${FarmCamelStatusPref.getCamelStatusValue()}},
+                            FarmCowStatusPref ${FarmCowStatusPref.getCowStatusValue()}},
+                            FarmSheepStatusPref ${FarmSheepStatusPref.getSheepStatusValue()}},
+                              """);
+                          },
                         );
                       }),
                   AddNewFarmWidget(
                     title: "Add Follow Up",
                     icon: Icons.task_alt,
-                    onClick: () {
-                      log("add follow up ");
+                    onClick: ()  {
+                                 FarmOwnerNamePref.clearOwnerName();
+                       FarmOwnerPref.clearOwner();
+                       FarmPref.clear();
+                       FarmAnimalTypePref.clearAnimalType();
+                      //!initialize the Canmel Farm shared preferences
+                       FarmCamelHerdPref.clearCamelHerd();
+                       FarmCowHerdPref.clearCowHerd();
+                       FarmSheepHerdPref.clearSheepHerd();
+                       FarmCamelStatusPref.clearCamelStatus();
+                       FarmCowStatusPref.clearCowStatus();
+                       FarmSheepStatusPref.clearSheepStatus();
                     },
                   ),
                 ],

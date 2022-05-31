@@ -14,7 +14,7 @@ class CamelSourcesBuyingNewanimalController extends GetxController {
   RxInt sourceNewId = 0.obs;
 
   void onTapSelected(BuildContext con, int id, index) { 
-    sourceNewId.value = id;
+    sourceNewId.value = id+1;
     Navigator.pop(con);
 
     sourceNewText.value = sourceNewList[index];

@@ -14,7 +14,7 @@ class CamelBreedTypeController extends GetxController {
   RxInt breedTypeId = 0.obs;
 
   void onTapSelected(BuildContext con, int id, index) { 
-    breedTypeId.value = id;
+    breedTypeId.value = id+1;
     Navigator.pop(con);
 
     breedTypeText.value = breedTypeList[index];

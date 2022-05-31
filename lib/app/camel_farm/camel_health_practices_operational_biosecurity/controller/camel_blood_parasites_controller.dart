@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 
 class CamelBloodParasitesController extends GetxController {
   List<String> bloodParasitesList = [
-    "medicine 1",
-    "medicine 2",
-    "medicine 3",
+    "medicine 1", //? push in api id 211
+    "medicine 2",//? push in api id 212
+    "medicine 3",//? push in api id 213
   ];
 
   RxString bloodParasitesText = 'medicines used to prevent blood parasites'.obs;
@@ -13,7 +13,7 @@ class CamelBloodParasitesController extends GetxController {
   RxInt bloodParasitesId = 0.obs;
 
   void onTapSelected(BuildContext con, int id, index) {
-    bloodParasitesId.value = id;
+    bloodParasitesId.value = id+1;
     Navigator.pop(con);
 
     bloodParasitesText.value = bloodParasitesList[index];

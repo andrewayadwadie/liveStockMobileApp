@@ -14,7 +14,7 @@ class CamelDistanceMovementController extends GetxController {
   RxInt distanceId = 0.obs;
 
   void onTapSelected(BuildContext con, int id, index) { 
-    distanceId.value = id;
+    distanceId.value = id+1;
     Navigator.pop(con);
 
     distanceText.value = distanceList[index];

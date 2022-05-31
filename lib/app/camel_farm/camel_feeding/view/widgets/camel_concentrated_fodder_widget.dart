@@ -7,6 +7,7 @@ import '../../../../shared_widgets/label_widget.dart';
 import '../../../general_management/controller/camel_send_camel_herd_data_controller.dart';
 import '../../controller/camel_blended_checkbox_controller.dart';
 import '../../controller/camel_feeding_date_controller.dart';
+import '../../controller/camel_feeding_textfield_controller.dart';
 import '../../controller/camel_fooder_radio_controller.dart';
 import '../../controller/camel_rodents_radio_controller.dart';
 import '../../controller/camel_salt_bars_radio_controller.dart';
@@ -16,9 +17,10 @@ import 'camel_feed_textfield_widget.dart';
 import 'camel_fooder_radio_widget.dart';
 import 'camel_synthetic_blended_radio_widget.dart';
 
+// ignore: must_be_immutable
 class CamelConcentratedFodderWidget extends StatelessWidget {
-  const CamelConcentratedFodderWidget({Key? key}) : super(key: key);
-
+    CamelConcentratedFodderWidget({Key? key}) : super(key: key);
+CamelFeedingTextfieldController textfieldCtrl = Get.put(CamelFeedingTextfieldController());
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SendCamelHerdDataController>(
@@ -43,7 +45,11 @@ class CamelConcentratedFodderWidget extends StatelessWidget {
                                 .blended, //? push in api object with id 83
                             onChangedNo: (val) => mainRadioCtrl.onChange(
                                 val ?? CamelSyntheticBlendedRadio.blended),
-                            groupValue: mainRadioCtrl.charcter),
+                            groupValue: mainRadioCtrl.charcter,
+                            noAnswerValue: CamelSyntheticBlendedRadio.noAnswer,
+                            onChangedNoAnswer:(val) => mainRadioCtrl.onChange(
+                                val ?? CamelSyntheticBlendedRadio.noAnswer),
+                            ),
                         if (mainRadioCtrl.charcter ==
                             CamelSyntheticBlendedRadio.synthetic)
                           Column(
@@ -53,8 +59,7 @@ class CamelConcentratedFodderWidget extends StatelessWidget {
                               CamelFeedingTextFieldWidget(
                                   title: "Factory name :",
                                   onNoteChange: (val) {
-                                    sendDataCtrl.addAnswer(
-                                        id: 84, answer: val ?? "");
+                                    textfieldCtrl.onChangefactoryNmae(val??"");
                                   }),
                               /* const LabelWidget(label: "Expiration date : "),*/
                               /*
@@ -118,13 +123,14 @@ class CamelConcentratedFodderWidget extends StatelessWidget {
                           ),
                         if (mainRadioCtrl.charcter ==
                             CamelSyntheticBlendedRadio.blended)
+                         //!---------------------------*-------------------*-------
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const LabelWidget(label: "Was it added?"),
                               GetBuilder<CamelblendedCheckboxController>(
                                   init:
-                                      CamelblendedCheckboxController(choices: [
+                                      CamelblendedCheckboxController(choices: [ 
                                     "Anti-fungal",
                                     "salts or vitamins",
                                   ]),
@@ -151,12 +157,13 @@ class CamelConcentratedFodderWidget extends StatelessWidget {
                                         ),
                                         if (feedTypeCtrl.choicesBoolList.last ==
                                             true)
-                                          const CamelConcentratedFodderWidget()
+                                            CamelConcentratedFodderWidget()
                                       ],
                                     );
                                   })
                             ],
                           ),
+                          //!---------------------------*-------------------*-------
                       ],
                     );
                   }),
@@ -175,7 +182,12 @@ class CamelConcentratedFodderWidget extends StatelessWidget {
                             noValue: CamelFooderRadio.no,
                             onChangedNo: (val) => fooderRadioCtrl
                                 .onChange(val ?? CamelFooderRadio.no),
-                            groupValue: fooderRadioCtrl.charcter),
+                            groupValue: fooderRadioCtrl.charcter,
+                            noAnswerValue: CamelFooderRadio.noAnswer ,
+                            onChangedNoAnswer: (val) => fooderRadioCtrl
+                                .onChange(val ?? CamelFooderRadio.noAnswer),
+                            
+                            ),
                         if (fooderRadioCtrl.charcter == CamelFooderRadio.yes)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,7 +215,15 @@ class CamelConcentratedFodderWidget extends StatelessWidget {
                                             storageCtrl.onChange(val ??
                                                 CamelStorageAppropriateRadio
                                                     .no),
-                                        groupValue: storageCtrl.charcter);
+                                        groupValue: storageCtrl.charcter,
+                                        noAnswerValue: CamelStorageAppropriateRadio.noAnswer,
+                                        onChangedNoAnswer: (val) =>
+                                            storageCtrl.onChange(val ??
+                                                CamelStorageAppropriateRadio
+                                                    .noAnswer),
+                                        
+                                        
+                                        );
                                   }),
 
                               //!-------------------------------------------------------------------
@@ -224,7 +244,16 @@ class CamelConcentratedFodderWidget extends StatelessWidget {
                                         onChangedNo: (val) =>
                                             rodentsCtrl.onChange(
                                                 val ?? CamelrodentsRadio.no),
-                                        groupValue: rodentsCtrl.charcter);
+                                        groupValue: rodentsCtrl.charcter,
+                                        
+                                        noAnswerValue: CamelrodentsRadio.noAnswer,
+                                        onChangedNoAnswer: (val) =>
+                                            rodentsCtrl.onChange(
+                                                val ?? CamelrodentsRadio.noAnswer),
+                                        
+                                        
+                                        
+                                        );
                                   }),
                             ],
                           ),
@@ -244,7 +273,11 @@ class CamelConcentratedFodderWidget extends StatelessWidget {
                         noValue: CamelSaltBarsRadio.no,
                         onChangedNo: (val) =>
                             saltCtrl.onChange(val ?? CamelSaltBarsRadio.no),
-                        groupValue: saltCtrl.charcter);
+                        groupValue: saltCtrl.charcter,
+                        noAnswerValue:CamelSaltBarsRadio.noAnswer ,
+                        onChangedNoAnswer: (val) =>
+                            saltCtrl.onChange(val ?? CamelSaltBarsRadio.noAnswer),
+                        );
                   }),
             ],
           );

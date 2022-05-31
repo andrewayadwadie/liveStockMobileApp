@@ -6,7 +6,7 @@ import '../../../../../utils/style.dart';
 import '../../controller/camel_distance_movement_controller.dart';
 
 class CamelDistanceMovementWidget extends StatelessWidget {
-  const CamelDistanceMovementWidget({ Key? key }) : super(key: key);
+  const CamelDistanceMovementWidget({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CamelDistanceMovementController>(
@@ -31,11 +31,9 @@ class CamelDistanceMovementWidget extends StatelessWidget {
                                 child: Container(
                                   alignment: Alignment.center,
                                   height:
-                                      MediaQuery.of(context).size.height /
-                                          12,
+                                      MediaQuery.of(context).size.height / 12,
                                   decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.circular(10),
+                                      borderRadius: BorderRadius.circular(10),
                                       border: Border.all(
                                           width: 1, color: Colors.grey)),
                                   child: Text(

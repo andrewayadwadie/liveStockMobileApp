@@ -31,7 +31,7 @@ class GeneralTextFieldWidget extends StatelessWidget {
           hintText: title,
         ),
         textInputAction: TextInputAction.next,
-        onSaved: onNoteChange,
+        onChanged: onNoteChange,
         // validator: (value) {}, // enabledBorder: InputBorder.none,
       ),
     );

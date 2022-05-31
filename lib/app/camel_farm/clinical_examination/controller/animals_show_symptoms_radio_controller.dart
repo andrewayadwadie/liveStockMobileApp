@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 
-enum CamelAnimalsShowSymptomsRadio { yes, no }
+enum CamelAnimalsShowSymptomsRadio { yes, no ,noAnswer}
 
 class CamelAnimalsShowSymptomsRadioController extends GetxController {
-  CamelAnimalsShowSymptomsRadio charcter = CamelAnimalsShowSymptomsRadio.yes;
+  CamelAnimalsShowSymptomsRadio charcter = CamelAnimalsShowSymptomsRadio.noAnswer;
 
   void onChange(CamelAnimalsShowSymptomsRadio value) {
     charcter = value;
