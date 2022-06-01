@@ -1,6 +1,4 @@
-
-import 'package:future_progress_dialog/future_progress_dialog.dart';
-
+ 
 import '../../../cow_form/clinical_symptoms/controller/insect_type_controller.dart';
 import '../../sheep_general_management/controller/sheep_send_sheep_herd_data_controller.dart';
 import '../../sheep_general_management/service/sheep_send_general_data_service.dart';
@@ -628,11 +626,7 @@ class SheepHealthOpertionalBiosecuritySendDataController
   }
 
   void sendData(BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(
-            SendSheepGeneralDataService.sendSheepGeneralDataService(
-                data: sendDataCtrl.answers)));
+ 
 
     var res = await SendSheepGeneralDataService.sendSheepGeneralDataService(
         data: sendDataCtrl.answers);

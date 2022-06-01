@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+ 
 import 'package:get/get.dart';
 
 import '../../../../../utils/db/auth_shared_preferences.dart';
@@ -81,12 +81,7 @@ class CowDiseasesScreen extends StatelessWidget {
                           alignment: Alignment.bottomRight,
                           child: InkWell(
                             onTap: () async {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => FutureProgressDialog(
-                                      CowSendDiseaseService
-                                          .cowSendDiseaseService(
-                                              data: diseaseDataCtrl.answers)));
+              
                               //      log("diseaseDataCtrl.answers${diseaseDataCtrl.answers}")
                               var res = await CowSendDiseaseService
                                   .cowSendDiseaseService(

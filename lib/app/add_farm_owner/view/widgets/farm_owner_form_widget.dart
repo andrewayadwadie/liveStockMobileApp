@@ -1,8 +1,8 @@
 import 'dart:developer';
- 
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+
 import 'package:get/get.dart';
 
 import '../../../../utils/controller/click_controller.dart';
@@ -226,88 +226,81 @@ class FarmOwnerFormWidget extends StatelessWidget {
                             }, // enabledBorder: InputBorder.none,
                           ),
                         ),
-             
-                       
                       ],
                     ),
                   ),
                   //!Next & Save Button
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: GetBuilder<ClickController>(
-                        init: ClickController(),
+                    child: GetBuilder<OwnerClickController>(
+                        init: OwnerClickController(),
                         builder: (click) {
                           return InkWell(
                               onTap: () async {
                                 if (farmOwnerKey.currentState!.validate()) {
                                   farmOwnerKey.currentState!.save();
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) =>
-                                          FutureProgressDialog(
-                                              SendOwnerData.sendOwnerData(
-                                                  name: ctrl.name ?? "",
-                                                  phone: ctrl.phone ?? 0,
-                                                  email: ctrl.email ?? "",
-                                                  address: ctrl.address ?? "",
-                                                  id: ctrl.id ?? 0),
-                                                  
-                                                  ));
-                                  
+                                  if (click.clicked == false) {
+                                    SendOwnerData.sendOwnerData(
+                                            name: ctrl.name ?? "",
+                                            phone: ctrl.phone ?? 0,
+                                            email: ctrl.email ?? "",
+                                            address: ctrl.address ?? "",
+                                            id: ctrl.id ?? 0)
+                                        .then((res) {
+                                      if (res.runtimeType == double) {
+                                        FarmOwnerPref.setOwnerValue(
+                                            res.toInt());
+                                        log(" farm id = ${FarmOwnerPref.getOwnerValue()}");
+                                        FarmOwnerNamePref.setOwnerNameValue(
+                                            ctrl.name ?? "");
 
-                                  var res = await SendOwnerData.sendOwnerData(
-                                      name: ctrl.name ?? "",
-                                      phone: ctrl.phone ?? 0,
-                                      email: ctrl.email ?? "",
-                                      address: ctrl.address ?? "",
-                                      id: ctrl.id ?? 0);
-                                      
-                                  if (res.runtimeType == double) {
-                                    FarmOwnerPref.setOwnerValue(res.toInt());
-                                    log(" farm id = ${FarmOwnerPref.getOwnerValue()}");
-                                    FarmOwnerNamePref.setOwnerNameValue(
-                                        ctrl.name ?? "");
+                                        Get.to(() => GeneralInfoScreen(
+                                            farmOwnerId:
+                                                FarmOwnerPref.getOwnerValue()));
+                                      } else if (res == 401) {
+                                        Get.offAll(const LoginScreen());
+                                      } else if (res == 500) {
+                                        Get.snackbar(
+                                          'Error',
+                                          'Server Error',
+                                          backgroundColor: Colors.red,
+                                          colorText: Colors.white,
+                                          icon: const Icon(
+                                            Icons.error,
+                                            color: Colors.white,
+                                          ),
+                                        );
+                                      }
 
-                                    Get.to(() => GeneralInfoScreen(
-                                        farmOwnerId:
-                                            FarmOwnerPref.getOwnerValue()));
-                                  } else if (res == 401) {
-                                    Get.offAll(const LoginScreen());
-                                  } else if (res == 500) {
-                                    Get.snackbar(
-                                      'Error',
-                                      'Server Error',
-                                      backgroundColor: Colors.red,
-                                      colorText: Colors.white,
-                                      icon: const Icon(
-                                        Icons.error,
-                                        color: Colors.white,
-                                      ),
-                                    );
-                                  }
-
-                                  //! error
-                                  else if (res.runtimeType == String) {
-                                    Get.snackbar(
-                                      'Error',
-                                      '$res',
-                                      backgroundColor: Colors.red,
-                                      colorText: Colors.white,
-                                      icon: const Icon(
-                                        Icons.error,
-                                        color: Colors.white,
-                                      ),
-                                    );
+                                      //! error
+                                      else if (res.runtimeType == String) {
+                                        Get.snackbar(
+                                          'Error',
+                                          '$res',
+                                          backgroundColor: Colors.red,
+                                          colorText: Colors.white,
+                                          icon: const Icon(
+                                            Icons.error,
+                                            color: Colors.white,
+                                          ),
+                                        );
+                                      }
+                                    });
                                     click.changeClick();
                                   }
                                 }
                               },
-                              child: SizedBox(
-                                  child: SvgPicture.asset(
-                                "assets/icons/next_button.svg",
-                                width: MediaQuery.of(context).size.width / 10,
-                                height: MediaQuery.of(context).size.height / 10,
-                              )));
+                              child: click.clicked == false
+                                  ? SizedBox(
+                                      child: SvgPicture.asset(
+                                      "assets/icons/next_button.svg",
+                                      width: MediaQuery.of(context).size.width /
+                                          10,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              10,
+                                    ))
+                                  : const CircularProgressIndicator());
                         }),
                   ),
                 ],

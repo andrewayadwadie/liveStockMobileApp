@@ -2,8 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
-import 'package:get/get.dart';
+ import 'package:get/get.dart';
 
 import '../../../../utils/db/auth_shared_preferences.dart';
 import '../../../auth/login_screen.dart';
@@ -117,10 +116,7 @@ class HorseLabInfoController extends GetxController {
   }
 
   void sendData(BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(
-            SendHorseLabDataService.sendHorseLabDataService(data: samples)));
+ 
 
     var res =
         await SendHorseLabDataService.sendHorseLabDataService(data: samples);

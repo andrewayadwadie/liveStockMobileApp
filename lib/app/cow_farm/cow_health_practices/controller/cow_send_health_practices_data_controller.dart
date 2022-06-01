@@ -1,6 +1,6 @@
  
 import 'package:flutter/material.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+
 import 'package:get/get.dart';
 
 import '../../../../utils/controller/current_location_controller.dart';
@@ -129,11 +129,7 @@ class CowHealthPracticesSendDataController extends GetxController {
   }
 
   void sendData(BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(
-            SendCowGeneralDataService.sendCowGeneralDataService(
-                data: sendDataCtrl.answers)));
+ 
 
     var res = await SendCowGeneralDataService.sendCowGeneralDataService(
         data: sendDataCtrl.answers);

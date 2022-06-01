@@ -11,7 +11,7 @@ class AreaController extends GetxController {
   RxInt areasId = 0.obs;
 
   void onTapSelected(BuildContext con, int id, index) async {
-    areasId.value = id+1;
+    areasId.value = id ;
     Navigator.pop(con);
     areasText.value = areas[index].name;
     update();

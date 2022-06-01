@@ -1,9 +1,8 @@
-import 'dart:io';
-
+ 
 import '../../controller/farm_type_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+ 
 import 'package:get/get.dart';
 
 import '../../../../utils/controller/click_controller.dart';
@@ -19,7 +18,7 @@ import '../../controller/activity_type_field_controller.dart';
 import '../../controller/area_controller.dart';
 import '../../controller/farm_info_form_controller.dart';
 import '../../controller/farm_location_controller.dart';
- 
+
 import '../../service/send_farm_data.dart';
 import '../widgets/new_farm_info_form_widget.dart';
 
@@ -127,9 +126,9 @@ class GeneralInfoScreen extends StatelessWidget {
                                                                   builder:
                                                                       (imgCtrl) {
                                                                     return GetBuilder<
-                                                                            ClickController>(
+                                                                            FarmClickController>(
                                                                         init:
-                                                                            ClickController(),
+                                                                            FarmClickController(),
                                                                         builder:
                                                                             (click) {
                                                                           return InkWell(
@@ -138,48 +137,53 @@ class GeneralInfoScreen extends StatelessWidget {
                                                                               if (_formKey.currentState!.validate()) {
                                                                                 _formKey.currentState!.save();
 
-                                                                                if (sizeCtrl.farmsId == 0 || activityCtrl.activityTypeId.value == 0 || areaCtrl.areasId.value == 0 || imgCtrl.image == File("")) {
-                                                                                  Get.snackbar(
-                                                                                    "Note",
-                                                                                    "you must fill all the Farm Data",
-                                                                                    backgroundColor: redColor,
-                                                                                    colorText: whiteColor,
-                                                                                    snackPosition: SnackPosition.TOP,
-                                                                                    borderRadius: 20,
-                                                                                    margin: const EdgeInsets.all(5),
-                                                                                    borderColor: redColor,
-                                                                                    borderWidth: 1,
-                                                                                  );
-                                                                                } else {
+                                                                                // if (sizeCtrl.farmsId == 0 || activityCtrl.activityTypeId.value == 0 || areaCtrl.areasId.value == 0 || imgCtrl.image == File("")) {
+                                                                                //   Get.snackbar(
+                                                                                //     "Note",
+                                                                                //     "you must fill all the Farm Data",
+                                                                                //     backgroundColor: redColor,
+                                                                                //     colorText: whiteColor,
+                                                                                //     snackPosition: SnackPosition.TOP,
+                                                                                //     borderRadius: 20,
+                                                                                //     margin: const EdgeInsets.all(5),
+                                                                                //     borderColor: redColor,
+                                                                                //     borderWidth: 1,
+                                                                                //   );
+                                                                                // } else {
+                                                                                if (click.clicked == false) {
                                                                                   location.getLocation(current.lat ?? 0.0, current.long ?? 0.0);
-                                                                                  showDialog(context: context, builder: (context) => FutureProgressDialog(SendFarmData.sendNewFarmData(name: farmInfoCtrl.farmName, photo: imgCtrl.image, size: sizeCtrl.farmsText, activityType: activityCtrl.activityTypeText, lat: current.lat ?? 0.0, long: current.long ?? 0.0, areaId: areaCtrl.areasId, farmOwnerId: farmOwnerId, location: "${location.country},${location.city},${location.area}")));
-                                                                                  var res = await SendFarmData.sendNewFarmData(name: farmInfoCtrl.farmName, photo: imgCtrl.image, size: sizeCtrl.farmsText, activityType: activityCtrl.activityTypeText, lat: current.lat ?? 0.0, long: current.long ?? 0.0, areaId: areaCtrl.areasId, farmOwnerId: farmOwnerId, location: "${location.country},${location.city},${location.area}");
-                                                                                  if (res.runtimeType == double) {
-                                                                                    FarmPref.setValue(res.toInt());
-                                                                                    Get.offAll(() => const AnimalTypeScreen());
-                                                                                  } else if (res == 401) {
-                                                                                    Get.offAll(() => const LoginScreen());
-                                                                                  } else if (res == 500 || res == 400) {
-                                                                                    Get.snackbar(
-                                                                                      'Error',
-                                                                                      'Server Error $res',
-                                                                                      backgroundColor: Colors.red,
-                                                                                      colorText: Colors.white,
-                                                                                      icon: const Icon(
-                                                                                        Icons.error,
-                                                                                        color: Colors.white,
-                                                                                      ),
-                                                                                    );
-                                                                                  }
+                                                                                  SendFarmData.sendNewFarmData(name: farmInfoCtrl.farmName, photo: imgCtrl.image, size: sizeCtrl.farmsText, activityType: activityCtrl.activityTypeText, lat: current.lat ?? 0.0, long: current.long ?? 0.0, areaId: areaCtrl.areasId, farmOwnerId: farmOwnerId, location: "${location.country},${location.city},${location.area}").then((res) {
+                                                                                    if (res.runtimeType == double) {
+                                                                                      FarmPref.setValue(res.toInt());
+                                                                                      Get.offAll(() => const AnimalTypeScreen());
+                                                                                    } else if (res == 401) {
+                                                                                      Get.offAll(() => const LoginScreen());
+                                                                                    } else if (res == 500 || res == 400) {
+                                                                                      Get.snackbar(
+                                                                                        'Error',
+                                                                                        'Server Error $res',
+                                                                                        backgroundColor: Colors.red,
+                                                                                        colorText: Colors.white,
+                                                                                        icon: const Icon(
+                                                                                          Icons.error,
+                                                                                          color: Colors.white,
+                                                                                        ),
+                                                                                      );
+                                                                                    }
+                                                                                  });
+
+                                                                                  click.changeClick();
                                                                                 }
                                                                               }
+                                                                              //  }
                                                                             },
-                                                                            child:
-                                                                                SvgPicture.asset(
-                                                                              "assets/icons/next_button.svg",
-                                                                              width: MediaQuery.of(context).size.width / 11,
-                                                                              height: MediaQuery.of(context).size.height / 11,
-                                                                            ),
+                                                                            child: click.clicked == false
+                                                                                ? SvgPicture.asset(
+                                                                                    "assets/icons/next_button.svg",
+                                                                                    width: MediaQuery.of(context).size.width / 11,
+                                                                                    height: MediaQuery.of(context).size.height / 11,
+                                                                                  )
+                                                                                : const CircularProgressIndicator(),
                                                                           );
                                                                         });
                                                                   });

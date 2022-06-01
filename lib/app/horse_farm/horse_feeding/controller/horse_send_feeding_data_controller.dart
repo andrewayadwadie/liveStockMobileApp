@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+ 
 import 'package:get/get.dart';
 
 import '../../../../utils/controller/current_location_controller.dart';
@@ -148,11 +148,6 @@ HorseFeedingTextfieldController textfieldCtrl = Get.put(HorseFeedingTextfieldCon
 
   void sendData(BuildContext context) async {
  
-      showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(SendHorseGeneralDataService.sendHorseGeneralDataService(
-        data: sendDataCtrl.answers)));
-
     var res = await SendHorseGeneralDataService.sendHorseGeneralDataService(
         data: sendDataCtrl.answers);
     if (res == 200) {

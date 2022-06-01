@@ -1,5 +1,4 @@
  
-import 'package:future_progress_dialog/future_progress_dialog.dart';
 
 import '../../horse_general_management/controller/horse_send_horse_herd_data_controller.dart';
 import '../../horse_general_management/service/horse_send_general_data_service.dart';
@@ -340,11 +339,7 @@ class HorseclinicalExaminationSendDataController extends GetxController {
   }
 
   void sendData(BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(
-            SendHorseGeneralDataService.sendHorseGeneralDataService(
-                data: sendDataCtrl.answers)));
+  
     var res = await SendHorseGeneralDataService.sendHorseGeneralDataService(
         data: sendDataCtrl.answers);
     if (res == 200) {

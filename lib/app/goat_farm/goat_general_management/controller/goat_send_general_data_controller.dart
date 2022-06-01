@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+ 
 
 import '../service/goat_send_general_data_service.dart';
 import '../../goat_housing/view/screen/goat_housing_scren.dart';
@@ -335,12 +335,7 @@ GoatWithAnimalsController withAnimalsCtrl = Get.put(GoatWithAnimalsController())
   }
 
   void sendData(BuildContext context) async {
- showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(
-          SendGoatGeneralDataService.sendGoatGeneralDataService(
-          data: sendDataCtrl.answers)
-        ));
+ 
       var res = await SendGoatGeneralDataService.sendGoatGeneralDataService(
           data: sendDataCtrl.answers);
       if (res == 200) {

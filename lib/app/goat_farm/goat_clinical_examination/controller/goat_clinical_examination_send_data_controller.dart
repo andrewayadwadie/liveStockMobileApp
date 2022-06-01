@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+ 
 import 'package:get/get.dart';
 
 import '../../../../utils/controller/current_location_controller.dart';
@@ -340,11 +340,8 @@ class GoatclinicalExaminationSendDataController extends GetxController {
 
   void sendData(BuildContext context) async {
     log("clinical ${sendDataCtrl.answers}");
-    showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(
-            SendGoatGeneralDataService.sendGoatGeneralDataService(
-                data: sendDataCtrl.answers)));
+    
+ 
       
     var res = await SendGoatGeneralDataService.sendGoatGeneralDataService(
         data: sendDataCtrl.answers);

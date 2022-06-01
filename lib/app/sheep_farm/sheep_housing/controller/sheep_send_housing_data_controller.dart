@@ -1,8 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
-import 'package:get/get.dart';
+ import 'package:get/get.dart';
 
 import '../../../../utils/controller/current_location_controller.dart';
 import '../../../../utils/db/auth_shared_preferences.dart';
@@ -191,10 +190,6 @@ sendDataCtrl.addAnswer(id: 329, answer: "");
   }
 
   void sendSheepHousingData(BuildContext context) async {
-   showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(SendSheepGeneralDataService.sendSheepGeneralDataService(
-        data: sendDataCtrl.answers)));
     
     var res = await SendSheepGeneralDataService.sendSheepGeneralDataService(
         data: sendDataCtrl.answers);

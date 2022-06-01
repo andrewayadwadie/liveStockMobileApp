@@ -1,4 +1,4 @@
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+ 
 
 import '../../../cow_clinical_examination/view/screen/cow_clinical_examination_screen.dart';
 import '../../controller/cow_immunization_way_text_controller.dart';
@@ -88,14 +88,7 @@ class CowImmunizationNewScreen extends StatelessWidget {
                           onTap: () async {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => FutureProgressDialog(
-                                      SendCowSendNewImmunizationService
-                                          .sendCowSendNewImmunizationService(
-                                              data:
-                                                  sendNewImmunizationDataController
-                                                      .answers)));
+                           
                               var res = await SendCowSendNewImmunizationService
                                   .sendCowSendNewImmunizationService(
                                       data: sendNewImmunizationDataController

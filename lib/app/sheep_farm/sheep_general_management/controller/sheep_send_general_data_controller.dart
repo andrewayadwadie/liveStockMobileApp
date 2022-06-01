@@ -1,7 +1,6 @@
 import 'dart:developer';
 
-import 'package:future_progress_dialog/future_progress_dialog.dart';
-
+ 
 import '../../../cow_form/general_info/controller/date_picker_controller.dart';
 import 'sheep_exist_animal_controller.dart';
 import 'sheep_mix_with_animals_controller.dart';
@@ -332,10 +331,7 @@ class SheepGeneralSendDataController extends GetxController {
   }
 
   void sendData( BuildContext context) async {
- showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(SendSheepGeneralDataService.sendSheepGeneralDataService(
-          data: sendDataCtrl.answers)));
+ 
       var res = await SendSheepGeneralDataService.sendSheepGeneralDataService(
           data: sendDataCtrl.answers);
       if (res == 200) {

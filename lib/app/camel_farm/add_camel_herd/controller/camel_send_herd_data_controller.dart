@@ -1,8 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
-import 'package:get/get.dart';
+ import 'package:get/get.dart';
 
 import '../../../../utils/controller/current_location_controller.dart';
 import '../../../../utils/db/auth_shared_preferences.dart';
@@ -37,31 +36,7 @@ class CamelSendHerdDataController extends GetxController {
       Get.put(CamelHerdDynastyController(camelHerdId: 2));
 
   void sendHerdData(BuildContext context) async {
-              showDialog(context: context, builder: (context) => FutureProgressDialog(
-             SendCamelHerdData.sendCamelHerdData(
-        numberOfAnimals: int.parse(herdFormCtrl.numberOfAnimals),
-        numberOfCases: int.parse(herdFormCtrl.numberOfCases),
-        numberOfAdults: int.parse(herdFormCtrl.numberOfAdults),
-        numberOfVirginity: int.parse(herdFormCtrl.numberOfVirginity),
-        numberOfAged: int.parse(herdFormCtrl.numberOfAged),
-        numberOfInfant: int.parse(herdFormCtrl.numberOfInfant),
-        numberOfAblaction: int.parse(herdFormCtrl.numberOfAblaction),
-        numberOfMales: int.parse(herdFormCtrl.numberOfMales),
-        numberOfFemales: int.parse(herdFormCtrl.numberOfFemales),
-        numberOfDeaths: int.parse(herdFormCtrl.numberOfDeaths),
-        numberOfSuddenDeath: int.parse(herdFormCtrl.numberOfSuddenDeath),
-        farmId: FarmPref.getValue(),
-        eductionSystemId: eduSysCtrl.educationId,
-        animalStrainId: dynastyHerdCtrl.dynastyId,
-        note: herdFormCtrl.note,
-        size: sizeCtrl.sizeText.value,
-        activityType: activityCtrl.activityTypeText.value,
-        lat: " ${location.currentLat ?? 0.0}",
-        long: "${location.currentLong ?? 0.0}",
-        dateOfEpidemiologicalSurvey:
-            "${dateCtrl.date.year}-${dateCtrl.date.month}-${dateCtrl.date.day} ")
-           ));
-    var res = await SendCamelHerdData.sendCamelHerdData(
+ var res = await SendCamelHerdData.sendCamelHerdData(
         numberOfAnimals: int.parse(herdFormCtrl.numberOfAnimals),
         numberOfCases: int.parse(herdFormCtrl.numberOfCases),
         numberOfAdults: int.parse(herdFormCtrl.numberOfAdults),

@@ -6,7 +6,7 @@ import '../service/cow_lab_info_services.dart';
 import '../../../../utils/db/auth_shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+ 
 import 'package:get/get.dart';
 
 class CowLabInfoController extends GetxController {
@@ -116,10 +116,7 @@ class CowLabInfoController extends GetxController {
   }
 
   void sendData(BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(
-            SendCowLabDataService.sendCowLabDataService(data: samples)));
+ 
     var res = await SendCowLabDataService.sendCowLabDataService(data: samples);
     if (res == 200) {
       await FarmCowStatusPref.setCowStatusValue(10);

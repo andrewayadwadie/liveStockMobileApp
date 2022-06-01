@@ -1,6 +1,5 @@
 import 'dart:developer';
-
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+ 
 
 import '../../cow_general_management/view/screen/cow_general_management_screen.dart';
 import '../services/cow_send_herd_data.dart';
@@ -38,30 +37,7 @@ class CowSendHerdDataController extends GetxController {
       Get.put(CowHerdDynastyController(cowHerdId: 1));
 
   void sendHerdData(BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(SendCowHerdData.sendCowHerdData(
-            numberOfAnimals: int.parse(herdFormCtrl.numberOfAnimals),
-            numberOfCases: int.parse(herdFormCtrl.numberOfCases),
-            numberOfAdults: int.parse(herdFormCtrl.numberOfAdults),
-            numberOfVirginity: int.parse(herdFormCtrl.numberOfVirginity),
-            numberOfAged: int.parse(herdFormCtrl.numberOfAged),
-            numberOfInfant: int.parse(herdFormCtrl.numberOfInfant),
-            numberOfAblaction: int.parse(herdFormCtrl.numberOfAblaction),
-            numberOfMales: int.parse(herdFormCtrl.numberOfMales),
-            numberOfFemales: int.parse(herdFormCtrl.numberOfFemales),
-            numberOfDeaths: int.parse(herdFormCtrl.numberOfDeaths),
-            numberOfSuddenDeath: int.parse(herdFormCtrl.numberOfSuddenDeath),
-            farmId: FarmPref.getValue(),
-            eductionSystemId: eduSysCtrl.educationId,
-            animalStrainId: dynastyHerdCtrl.dynastyId,
-            note: herdFormCtrl.note,
-            size: sizeCtrl.sizeText.value,
-            activityType: activityCtrl.activityTypeText.value,
-            lat: " ${location.currentLat ?? 0.0}",
-            long: "${location.currentLong ?? 0.0}",
-            dateOfEpidemiologicalSurvey:
-                "${dateCtrl.date.year}-${dateCtrl.date.month}-${dateCtrl.date.day} ")));
+ 
     var res = await SendCowHerdData.sendCowHerdData(
         numberOfAnimals: int.parse(herdFormCtrl.numberOfAnimals),
         numberOfCases: int.parse(herdFormCtrl.numberOfCases),

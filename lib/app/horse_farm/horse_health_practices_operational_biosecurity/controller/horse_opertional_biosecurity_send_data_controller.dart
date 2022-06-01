@@ -1,6 +1,5 @@
  
-import 'package:future_progress_dialog/future_progress_dialog.dart';
-
+ 
 import '../../../camel_farm/camel_health_practices_operational_biosecurity/controller/camel_antibiotics_date_controller.dart';
 import '../../horse_general_management/controller/horse_send_horse_herd_data_controller.dart';
 import '../../horse_general_management/service/horse_send_general_data_service.dart';
@@ -626,11 +625,7 @@ class HorseHealthOpertionalBiosecuritySendDataController
   }
 
   void sendData(context) async {
-    showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(
-            SendHorseGeneralDataService.sendHorseGeneralDataService(
-                data: sendDataCtrl.answers)));
+ 
     var res = await SendHorseGeneralDataService.sendHorseGeneralDataService(
         data: sendDataCtrl.answers);
     if (res == 200) {

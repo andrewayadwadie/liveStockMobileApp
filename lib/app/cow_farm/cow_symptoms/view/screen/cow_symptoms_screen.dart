@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+ 
 import 'package:get/get.dart';
 
 import '../../../../../utils/db/auth_shared_preferences.dart';
@@ -83,15 +83,7 @@ CowSendsymptomsDataController symptomsDataCtrl =
                           alignment: Alignment.bottomRight,
                           child: InkWell(
                             onTap: () async {
-                                         showDialog(
-                                      context: context,
-                                      builder: (context) =>
-                                          FutureProgressDialog(
-                                         CowSendSymptomsService
-                                  .cowSendSymptomsService(
-                                      data: symptomsDataCtrl.answers)
-                                                  
-                                                  ));
+                                   
                               var res = await CowSendSymptomsService
                                   .cowSendSymptomsService(
                                       data: symptomsDataCtrl.answers);

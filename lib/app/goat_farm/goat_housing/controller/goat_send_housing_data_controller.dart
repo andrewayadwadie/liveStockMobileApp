@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+ 
 import 'package:get/get.dart';
 
 import '../../../../utils/controller/current_location_controller.dart';
@@ -186,10 +186,7 @@ sendDataCtrl.addAnswer(id: 329, answer: "");
   }
 
   void sendGoatHousingData( BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(SendGoatGeneralDataService.sendGoatGeneralDataService(
-        data: sendDataCtrl.answers)));
+ 
     var res = await SendGoatGeneralDataService.sendGoatGeneralDataService(
         data: sendDataCtrl.answers);
     if (res == 200) {

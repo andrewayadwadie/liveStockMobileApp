@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+ 
 import 'package:get/get.dart';
 
 import '../../../../../utils/db/auth_shared_preferences.dart';
@@ -82,13 +82,7 @@ class GoatSymptomsScreen extends StatelessWidget {
                           alignment: Alignment.bottomRight,
                           child: InkWell(
                             onTap: () async {
-                              //      log("symptomsDataCtrl.answers${symptomsDataCtrl.answers}")
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => FutureProgressDialog(
-                                      GoatSendSymptomsService
-                                          .goatSendSymptomsService(
-                                              data: symptomsDataCtrl.answers)));
+                           
                               var res = await GoatSendSymptomsService
                                   .goatSendSymptomsService(
                                       data: symptomsDataCtrl.answers);

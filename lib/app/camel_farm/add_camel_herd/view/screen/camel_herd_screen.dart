@@ -1,3 +1,4 @@
+import 'package:animal_wealth/utils/controller/click_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -79,24 +80,35 @@ class CamelHerdScreen extends StatelessWidget {
                           child: GetBuilder<CamelSendHerdDataController>(
                               init: CamelSendHerdDataController(),
                               builder: (ctrl) {
-                                return InkWell(
-                                  onTap: () async {
-                                    if (_formKey.currentState!.validate()) {
-                                      _formKey.currentState!.save();
-                                      ctrl.sendHerdData(context);
-                                    }
-                                  },
-                                  child: SizedBox(
-                                    child: SvgPicture.asset(
-                                      "assets/icons/next_button.svg",
-                                      width:
-                                          MediaQuery.of(context).size.width /
-                                              10,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              10,
-                                    ),
-                                  ),
+                                return GetBuilder<CamelHerdClickController>(
+                                  init: CamelHerdClickController(),
+                                  builder: (click) {
+                                    return InkWell(
+                                      onTap: () async {
+                                        if (_formKey.currentState!.validate()) {
+                                          _formKey.currentState!.save();
+                                          if(click.clicked==false){
+                                            ctrl.sendHerdData(context); 
+                                            click.changeClick();
+                                          }
+                                         
+                                        }
+                                      },
+                                      child: 
+                                      click.clicked==false?
+                                      SizedBox(
+                                        child: SvgPicture.asset(
+                                          "assets/icons/next_button.svg",
+                                          width:
+                                              MediaQuery.of(context).size.width /
+                                                  10,
+                                          height:
+                                              MediaQuery.of(context).size.height /
+                                                  10,
+                                        ),
+                                      ):const CircularProgressIndicator(),
+                                    );
+                                  }
                                 );
                               }),
                         )

@@ -28,14 +28,15 @@ class SendFarmData {
     // ignore: deprecated_member_use
     try {
     var headers = <String, String>{
-      "Content-type": "application/json",
-      'Accept': 'application/json',
+      "Content-type": "multipart/form-data",
+      
       'Authorization': 'Bearer ${TokenPref.getTokenValue()}',
     };
 
     var request = http.MultipartRequest("POST", url);
     request.headers.addAll(headers);
     if (photo.path != "") {
+
       // ignore: deprecated_member_use
       var stream = http.ByteStream(DelegatingStream.typed(photo.openRead()));
       // ignore: deprecated_member_use
@@ -63,9 +64,7 @@ class SendFarmData {
     if (res.statusCode == 200 || res.statusCode == 201) {
         return double.parse(sucessRes);
       } else if (res.statusCode == 400) {
-        res.stream.bytesToString().then((value){
-          log( " value 400 : $value");
-        });
+ 
          return 400;
       } else if (res.statusCode == 401) {
         return 401;
@@ -75,8 +74,8 @@ class SendFarmData {
         return 500;
       }
   }catch (e) {
-       
-      Get.snackbar("error", "$e");
+      log("errrror : $e"); 
+      Get.snackbar("error from service ", "$e");
     }
   }
 }

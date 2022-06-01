@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+ 
 import 'package:get/get.dart';
 
 import '../../../../utils/db/auth_shared_preferences.dart';
@@ -117,12 +117,7 @@ class CamelLabInfoController extends GetxController {
   }
 
   void sendData(BuildContext context) async {
-    log("Lab : $samples");
-
-    showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(
-            SendCamelLabDataService.sendCamelLabDataService(data: samples)));
+ 
 
     var res =
         await SendCamelLabDataService.sendCamelLabDataService(data: samples);

@@ -1,7 +1,6 @@
 import 'dart:developer';
  
-import 'package:future_progress_dialog/future_progress_dialog.dart';
-
+ 
 import '../../sheep_general_management/controller/sheep_send_sheep_herd_data_controller.dart';
 import '../../sheep_general_management/service/sheep_send_general_data_service.dart';
 import '../../sheep_reproduction/view/screen/sheep_reproduction_screen.dart';
@@ -150,11 +149,7 @@ SheepFeedingTextfieldController textfieldCtrl = Get.put(SheepFeedingTextfieldCon
   }
 
   void sendData(BuildContext context) async {
- showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(
-          SendSheepGeneralDataService.sendSheepGeneralDataService(
-        data: sendDataCtrl.answers)));
+ 
     var res = await SendSheepGeneralDataService.sendSheepGeneralDataService(
         data: sendDataCtrl.answers);
     if (res == 200) {

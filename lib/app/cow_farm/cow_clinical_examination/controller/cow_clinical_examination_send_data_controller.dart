@@ -1,4 +1,4 @@
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+ 
 
 import '../../cow_general_management/controller/cow_send_cow_herd_data_controller.dart';
 import '../../cow_general_management/service/cow_send_general_data_service.dart';
@@ -336,11 +336,7 @@ class CowclinicalExaminationSendDataController extends GetxController {
   }
 
   void sendData(BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(
-            SendCowGeneralDataService.sendCowGeneralDataService(
-                data: sendDataCtrl.answers)));
+ 
     var res = await SendCowGeneralDataService.sendCowGeneralDataService(
         data: sendDataCtrl.answers);
     if (res == 200) {

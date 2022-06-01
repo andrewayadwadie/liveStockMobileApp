@@ -1,7 +1,7 @@
  
 
 import 'package:flutter/material.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+ 
 import 'package:get/get.dart';
 
 import '../../../../utils/controller/current_location_controller.dart';
@@ -123,12 +123,7 @@ GoatHealthPractciesTextFieldController healthPractciesTextFieldCtrl =
   }
 
   void sendData(BuildContext context) async {
- showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(
-          SendGoatGeneralDataService.sendGoatGeneralDataService(
-        data: sendDataCtrl.answers)
-        ));
+ 
     var res = await SendGoatGeneralDataService.sendGoatGeneralDataService(
         data: sendDataCtrl.answers);
     if (res == 200) {

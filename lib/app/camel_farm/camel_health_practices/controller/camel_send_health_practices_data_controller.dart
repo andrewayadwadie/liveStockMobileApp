@@ -1,7 +1,7 @@
  
 
 import 'package:flutter/material.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+ 
 import 'package:get/get.dart';
 
 import '../../../../utils/controller/current_location_controller.dart';
@@ -134,11 +134,7 @@ class CamelHealthPracticesSendDataController extends GetxController {
   }
 
   void sendData(BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(
-            SendCamelGeneralDataService.sendCamelGeneralDataService(
-                data: sendDataCtrl.answers)));
+ 
 
     var res = await SendCamelGeneralDataService.sendCamelGeneralDataService(
         data: sendDataCtrl.answers);

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
-import 'package:get/get.dart';
+ import 'package:get/get.dart';
 
 import '../../../../utils/controller/current_location_controller.dart';
 import '../../../../utils/db/auth_shared_preferences.dart';
@@ -132,11 +131,7 @@ class SheepHealthPracticesSendDataController extends GetxController {
   }
 
   void sendData(BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(
-            SendSheepGeneralDataService.sendSheepGeneralDataService(
-                data: sendDataCtrl.answers)));
+ 
     var res = await SendSheepGeneralDataService.sendSheepGeneralDataService(
         data: sendDataCtrl.answers);
     if (res == 200) {

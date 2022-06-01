@@ -15,28 +15,30 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async { 
+      onWillPop: () async {
         DateTime now = DateTime.now();
-  if (now.difference(timeBackPressed) > const Duration(seconds: 2)) {
-    timeBackPressed = now;
-    Get.snackbar("Alert", "Press back again to exit");
-    return Future.value(false);
-  }
-  SystemNavigator.pop(); // add this.
+        if (now.difference(timeBackPressed) > const Duration(seconds: 2)) {
+          timeBackPressed = now;
+          Get.snackbar("Alert", "Press back again to exit");
+          return Future.value(false);
+        }
+        SystemNavigator.pop(); // add this.
 
-  return Future.value(true);
+        return Future.value(true);
       },
-      child: Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Color(0xFFFFF155), primaryColor])),
-        child: SafeArea(
-          child: Scaffold(
-              key: _key,
-              backgroundColor: Colors.transparent,
-              body: Column(
+      child: SafeArea(
+        child: Scaffold(
+          key: _key,
+          backgroundColor: Colors.transparent,
+          body: Container(
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Color(0xFFFFF155), primaryColor])),
+            child: SingleChildScrollView(
+              reverse: true,
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   //Home Screen Header
@@ -46,12 +48,13 @@ class HomeScreen extends StatelessWidget {
                   const HomeBodyWidget(),
                 ],
               ),
-              drawer: const ClipRRect(
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(25),
-                    bottomRight: Radius.circular(25)),
-                child: DrawerScreen(),
-              )),
+            ),
+          ),
+          drawer: const ClipRRect(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(25), bottomRight: Radius.circular(25)),
+            child: DrawerScreen(),
+          ),
         ),
       ),
     );

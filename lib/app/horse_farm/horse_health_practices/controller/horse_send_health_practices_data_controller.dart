@@ -1,8 +1,7 @@
  
  
 import 'package:flutter/material.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
-import 'package:get/get.dart';
+ import 'package:get/get.dart';
 
 import '../../../../utils/controller/current_location_controller.dart';
 import '../../../../utils/db/auth_shared_preferences.dart';
@@ -123,15 +122,6 @@ HorseHealthPractciesTextFieldController healthPractciesTextFieldCtrl =
   }
 
   void sendData(context) async {
-  
-
-
-    showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(SendHorseGeneralDataService.sendHorseGeneralDataService(
-        data: sendDataCtrl.answers)));
-
-
 
     var res = await SendHorseGeneralDataService.sendHorseGeneralDataService(
         data: sendDataCtrl.answers);

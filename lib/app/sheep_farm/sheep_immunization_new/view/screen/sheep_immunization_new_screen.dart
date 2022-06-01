@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:get/get.dart';
 
 import '../../../../../utils/db/auth_shared_preferences.dart';
@@ -86,14 +85,7 @@ class SheepImmunizationNewScreen extends StatelessWidget {
                             onTap: () async {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
-                                showDialog(
-                                    context: context,
-                                    builder: (context) => FutureProgressDialog(
-                                        SendSheepSendNewImmunizationService
-                                            .sendSheepSendNewImmunizationService(
-                                                data:
-                                                    sendNewImmunizationDataController
-                                                        .answers)));
+                               
                                 var res =
                                     await SendSheepSendNewImmunizationService
                                         .sendSheepSendNewImmunizationService(

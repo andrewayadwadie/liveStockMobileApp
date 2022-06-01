@@ -1,4 +1,3 @@
-import 'package:future_progress_dialog/future_progress_dialog.dart';
 
 import '../../controller/sheep_send_symptoms_controller.dart';
 import '../../service/sheep_send_symptoms_service.dart';
@@ -84,12 +83,7 @@ class SheepSymptomsScreen extends StatelessWidget {
                           alignment: Alignment.bottomRight,
                           child: InkWell(
                             onTap: () async {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => FutureProgressDialog(
-                                      SheepSendSymptomsService
-                                          .sheepSendSymptomsService(
-                                              data: symptomsDataCtrl.answers)));
+                    
                               var res = await SheepSendSymptomsService
                                   .sheepSendSymptomsService(
                                       data: symptomsDataCtrl.answers);

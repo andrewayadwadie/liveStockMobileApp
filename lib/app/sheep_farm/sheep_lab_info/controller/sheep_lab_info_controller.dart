@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:future_progress_dialog/future_progress_dialog.dart';
 
 import '../../../auth/login_screen.dart';
 import '../../sheep_diseases/view/screen/sheep_diseases_screen.dart';
@@ -117,10 +116,7 @@ class SheepLabInfoController extends GetxController {
   }
 
   void sendData(BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (context) => FutureProgressDialog(
-            SendSheepLabDataService.sendSheepLabDataService(data: samples)));
+  
 
     var res =
         await SendSheepLabDataService.sendSheepLabDataService(data: samples);

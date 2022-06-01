@@ -35,6 +35,7 @@ class HomeBodyWidget extends StatelessWidget {
         ],
       ),
       child: SingleChildScrollView(
+        reverse: true,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

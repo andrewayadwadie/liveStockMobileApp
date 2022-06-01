@@ -25,13 +25,13 @@ class ImagesWidget extends StatelessWidget {
             padding: const EdgeInsets.all(3),
             margin: const EdgeInsets.symmetric(horizontal: 90, vertical: 20),
             decoration: BoxDecoration(
-                border: Border.all(width: 2, color: redColor),
+              //  border: Border.all(width: 2, color: redColor),
                 borderRadius: BorderRadius.circular(10)),
             child: Image.file(
               file1,
-            //   width: MediaQuery.of(context).size.width /3,
-            // height: MediaQuery.of(context).size.height / 5,
-              fit: BoxFit.fill,
+              width: MediaQuery.of(context).size.width /3,
+            height: MediaQuery.of(context).size.height / 5,
+              fit: BoxFit.contain,
             ),
           )
         : Container(
